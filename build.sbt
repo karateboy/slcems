@@ -1,5 +1,5 @@
 lazy val root = (project in file("."))
-  .enablePlugins(PlayScala)
+  .enablePlugins(PlayScala, SwaggerPlugin)
   .settings(
     name := """slcems""",
     organization := "com.wecc",
@@ -30,5 +30,8 @@ libraryDependencies += "org.scalikejdbc" %% "scalikejdbc-play-fixture" % "2.8.0-
 libraryDependencies += "com.iheart" %% "play-swagger" % "0.10.6-PLAY2.8"
 
 libraryDependencies += "org.webjars" % "swagger-ui" % "3.43.0"
+
+// https://mvnrepository.com/artifact/com.auth0/java-jwt
+libraryDependencies += "com.auth0" % "java-jwt" % "3.18.2"
 
 swaggerDomainNameSpaces := Seq("models")
