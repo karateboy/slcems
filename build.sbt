@@ -3,7 +3,7 @@ lazy val root = (project in file("."))
   .settings(
     name := """slcems""",
     organization := "com.wecc",
-    version := "1.0-0",
+    version := "1.0-1",
     scalaVersion := "2.13.6",
     libraryDependencies ++= Seq(
       guice,
@@ -15,6 +15,7 @@ lazy val root = (project in file("."))
       "-Xfatal-warnings"
     )
   )
+libraryDependencies += ws
 libraryDependencies ++= Seq(
   "org.scalikejdbc" %% "scalikejdbc"                  % "3.5.0",
   "org.scalikejdbc" %% "scalikejdbc-config"           % "3.5.0",

@@ -1,18 +1,20 @@
 package controllers
 
 import models._
-import play.api.Application
+import play.api.{Application, Logging}
 import play.api.libs.json._
 import play.api.mvc._
+import play.api.libs.ws._
 
 import javax.inject._
-
+import scala.concurrent.ExecutionContext.Implicits.global
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents, application: Application) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents, WSClient: WSClient)
+  extends AbstractController(cc) with Logging {
 
   /**
    * Create an Action to render an HTML page.
@@ -64,5 +66,35 @@ class HomeController @Inject()(cc: ControllerComponents, application: Applicatio
       .getOrElse {
         BadRequest("Expecting application/json request body")
       }
+  }
+  case class ElementValue(value: String, measures: String)
+
+  case class TimeForecast(startTime: String, elementValue: Seq[ElementValue])
+
+  case class WeatherElement(elementName: String, time: Seq[TimeForecast])
+
+  case class LocationElement(locationName: String, weatherElement: Seq[WeatherElement])
+
+  case class LocationForecast(locationName: String, location: Seq[LocationElement])
+
+  case class WeatherForecastRecord(locations: Seq[LocationForecast])
+
+  case class WeatherForecastRecords(records: WeatherForecastRecord)
+
+  def weatherReport() = Action.async {
+    val f = WSClient.url(s"https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-077?format=JSON&locationName=歸仁區")
+      .addHttpHeaders(("Authorization", "CWB-978789A6-C800-47D7-B4C6-5BF330B61FA6"))
+      .get()
+    for (ret <- f) yield {
+      implicit val r7 = Json.reads[ElementValue]
+      implicit val r6 = Json.reads[TimeForecast]
+      implicit val r5 = Json.reads[WeatherElement]
+      implicit val r4 = Json.reads[LocationElement]
+      implicit val r3 = Json.reads[LocationForecast]
+      implicit val r2 = Json.reads[WeatherForecastRecord]
+      implicit val r1 = Json.reads[WeatherForecastRecords]
+      //ret.json.validate[WeatherForecastRecords]
+      Ok(Json.toJson(ret.json))
+    }
   }
 }

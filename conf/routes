@@ -16,4 +16,5 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 POST    /auth/slcems/login          controllers.HomeController.login()
 ### NoDocs ###
-GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+GET     /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+GET     /WeatherReport                              controllers.HomeController.weatherReport()
