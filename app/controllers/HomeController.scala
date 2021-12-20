@@ -1,5 +1,6 @@
 package controllers
 
+import akka.actor.ActorSystem
 import models._
 import play.api.{Application, Logging}
 import play.api.libs.json._
@@ -13,9 +14,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient)
+class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient, system: ActorSystem)
   extends AbstractController(cc) with Logging {
-
+  val buildingCollector = system.actorOf(RDbuildingCollector.props(), "rdbuildingCollector")
   /**
    * Create an Action to render an HTML page.
    *

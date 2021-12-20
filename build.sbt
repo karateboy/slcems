@@ -38,4 +38,7 @@ libraryDependencies += "com.auth0" % "java-jwt" % "3.18.2"
 // https://mvnrepository.com/artifact/org.jsoup/jsoup
 libraryDependencies += "org.jsoup" % "jsoup" % "1.14.3"
 
+// https://mvnrepository.com/artifact/org.jsoup/jsoup
+libraryDependencies += "org.jsoup" % "jsoup" % "1.14.3"
+
 swaggerDomainNameSpaces := Seq("models")
