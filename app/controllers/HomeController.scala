@@ -13,7 +13,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents, WSClient: WSClient)
+class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient)
   extends AbstractController(cc) with Logging {
 
   /**
@@ -82,7 +82,7 @@ class HomeController @Inject()(cc: ControllerComponents, WSClient: WSClient)
   case class WeatherForecastRecords(records: WeatherForecastRecord)
 
   def weatherReport() = Action.async {
-    val f = WSClient.url(s"https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-077?format=JSON&locationName=歸仁區")
+    val f = wsClient.url(s"https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-077?format=JSON&locationName=歸仁區")
       .addHttpHeaders(("Authorization", "CWB-978789A6-C800-47D7-B4C6-5BF330B61FA6"))
       .get()
     for (ret <- f) yield {
