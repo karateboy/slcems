@@ -7,7 +7,7 @@ Website: http://gootbootstrap.com
 Purchase: https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0?ref=myorange
 License: You must have a valid license purchased only from wrapbootstrap.com (link above) in order to legally use this theme for your project.
 -->
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <!-- base css -->
     <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="css/vendors.bundle.css">
     <link id="appbundle" rel="stylesheet" media="screen, print" href="css/app.bundle.css">
-    <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
+    <link id="mytheme" rel="stylesheet" media="screen, print" href="css/themes/cust-theme-13.css">
     <link id="myskin" rel="stylesheet" media="screen, print" href="css/skins/skin-master.css">
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -33,14 +33,14 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <link rel="stylesheet" media="screen, print" href="css/miscellaneous/reactions/reactions.css">
     <link rel="stylesheet" media="screen, print" href="css/miscellaneous/fullcalendar/fullcalendar.bundle.css">
     <link rel="stylesheet" media="screen, print" href="css/miscellaneous/jqvmap/jqvmap.bundle.css">
-    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
-    <!-- Required scripts -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> -->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
         integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
+        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <!-- BEGIN Body -->
@@ -298,8 +298,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         <li class="breadcrumb-item"><a href="javascript:void(0);">沙崙科學園區</a></li>
                         <li class="breadcrumb-item">管理平台</li>
                         <li class="breadcrumb-item active">首頁</li>
-                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span
-                                class="js-get-date"></span></li>
+                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date">{{
+                                current }}</span></li>
                     </ol>
                     <div class="subheader">
                         <h1 class="subheader-title">
@@ -359,12 +359,12 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             </div>
                                             <div class="col-lg-5 col-xl-4 pl-lg-3">
                                                 <div class="d-flex mt-2">
-                                                    台灣智駕測試實驗室
-                                                    <span class="d-inline-block ml-auto">123 KW</span>
+                                                    台灣智駕測試實驗室(尚未連線)
+                                                    <span class="d-inline-block ml-auto">N/A</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-fusion-400" role="progressbar"
-                                                        style="width: 65%;" aria-valuenow="65" aria-valuemin="0"
+                                                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
 
@@ -373,17 +373,17 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                     <span class="d-inline-block ml-auto">100 KW</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
-                                                    <div class="progress-bar bg-info-500" role="progressbar"
-                                                        style="width: 34%;" aria-valuenow="34" aria-valuemin="0"
+                                                    <div class="progress-bar bg-success-500" role="progressbar"
+                                                        style="width: 50%;" aria-valuenow="34" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    智慧綠能循環住宅園區
-                                                    <span class="d-inline-block ml-auto">100 KW</span>
+                                                    智慧綠能循環住宅園區(尚未連線)
+                                                    <span class="d-inline-block ml-auto">N/A</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
-                                                    <div class="progress-bar bg-info-400" role="progressbar"
-                                                        style="width: 77%;" aria-valuenow="77" aria-valuemin="0"
+                                                    <div class="progress-bar bg-danger-100" role="progressbar"
+                                                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
@@ -396,21 +396,21 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    智慧綠能循環住宅園區
-                                                    <span class="d-inline-block ml-auto">100 KW</span>
+                                                    智慧綠能循環住宅園區(尚未連線)
+                                                    <span class="d-inline-block ml-auto">N/A</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-success-500" role="progressbar"
-                                                        style="width: 34%;" aria-valuenow="34" aria-valuemin="0"
+                                                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    會展中心
-                                                    <span class="d-inline-block ml-auto">100 KW</span>
+                                                    會展中心(尚未連線)
+                                                    <span class="d-inline-block ml-auto">N/A</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-success-500" role="progressbar"
-                                                        style="width: 84%;" aria-valuenow="84" aria-valuemin="0"
+                                                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                             </div>
@@ -435,7 +435,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="ml-2 js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="75" data-piesize="50" data-linewidth="5"
+                                                        data-percent="0" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
@@ -443,7 +443,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         </div>
                                                     </div>
                                                     <span class="d-inline-block ml-2 text-muted">
-                                                        台灣智駕測試實驗室
+                                                        台灣智駕測試實驗室(尚未連線)
                                                         <i class="fal fa-caret-up color-danger-500 ml-1"></i>
                                                     </span>
                                                 </div>
@@ -451,7 +451,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="79" data-piesize="50" data-linewidth="5"
+                                                        data-percent="100" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
@@ -467,7 +467,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-info-500 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="23" data-piesize="50" data-linewidth="5"
+                                                        data-percent="0" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
@@ -475,7 +475,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         </div>
                                                     </div>
                                                     <span class="d-inline-block ml-2 text-muted">
-                                                        智慧綠能循環住宅園區
+                                                        智慧綠能循環住宅園區(尚未連線)
                                                         <i class="fal fa-caret-up color-success-500 ml-1"></i>
                                                     </span>
                                                 </div>
@@ -483,7 +483,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-fusion-500 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="36" data-piesize="50" data-linewidth="5"
+                                                        data-percent="0" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
@@ -491,7 +491,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         </div>
                                                     </div>
                                                     <span class="d-inline-block ml-2 text-muted">
-                                                        中研院南部院區
+                                                        中研院南部院區(尚未連線)
                                                         <i class="fal fa-caret-down color-success-500 ml-1"></i>
                                                     </span>
                                                 </div>
@@ -499,7 +499,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="ml-2 js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="75" data-piesize="50" data-linewidth="5"
+                                                        data-percent="100" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt" data-scalelength="0">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
@@ -515,7 +515,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="75" data-piesize="50" data-linewidth="5"
+                                                        data-percent="0" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt" data-scalelength="0">
                                                         <div
                                                             class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
@@ -523,7 +523,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         </div>
                                                     </div>
                                                     <span class="d-inline-block ml-2 text-muted">
-                                                        會展中心
+                                                        會展中心 (尚未連線)
                                                         <i class="fal fa-caret-up color-danger-500 ml-1"></i>
                                                     </span>
                                                 </div>
@@ -579,13 +579,11 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
                 <!-- END Page Content -->
-                <!-- BEGIN Page Footer -->
-                <!-- END Page Footer -->
                 <!-- BEGIN Shortcuts -->
                 <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog"
                     aria-labelledby="modal-shortcut" aria-hidden="true">
@@ -1179,7 +1177,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 
     </script>
     <!-- The order of scripts is irrelevant. Please check out the plugin pages for more details about these plugins below: -->
-    <script src="js/dependency/moment/moment.js"></script>
     <script src="js/miscellaneous/fullcalendar/fullcalendar.bundle.js"></script>
     <script src="js/statistics/sparkline/sparkline.bundle.js"></script>
     <script src="js/statistics/easypiechart/easypiechart.bundle.js"></script>
@@ -1811,11 +1808,13 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 
     </script>
     <script>
+        moment.locale('zh_tw');
         new Vue({
             //this targets the div id app
             el: '#js-page-content',
             data() {
                 return {
+                    current: moment().format("lll"),
                     forecast: "降雨機率15%",
                     fields: [
                         {

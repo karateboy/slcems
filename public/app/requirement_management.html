@@ -12,7 +12,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <head>
     <meta charset="utf-8">
     <title>
-        需量調控 - 電能管理資訊平台 - 電能管理系統平台 v4.5.1
+        需量調控 - 管理平台 - 沙崙科學園區 v4.5.1
     </title>
     <meta name="description" content="需量調控">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +33,14 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <link rel="stylesheet" media="screen, print" href="css/miscellaneous/reactions/reactions.css">
     <link rel="stylesheet" media="screen, print" href="css/miscellaneous/fullcalendar/fullcalendar.bundle.css">
     <link rel="stylesheet" media="screen, print" href="css/miscellaneous/jqvmap/jqvmap.bundle.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
+        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <!-- BEGIN Body -->
 <!-- Possible Classes
@@ -128,8 +136,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <div class="page-logo">
                     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                         data-toggle="modal" data-target="#modal-shortcut">
-                        <img src="img/logo.svg" alt="電能管理系統平台" aria-roledescription="logo">
-                        <span class="page-logo-text mr-1">電能管理系統平台</span>
+                        <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
+                        <span class="page-logo-text mr-1">沙崙科學園區</span>
                         <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                         <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
                     </a>
@@ -147,15 +155,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         </div>
                     </div>
                     <div class="info-card">
-                        <img src="img/demo/avatars/logo.svg" class="profile-image" alt="智慧綠能科學城">
-                        <div class="info-card-text">
-                            <a href="#" class="d-flex align-items-center text-white">
-                                <span class="text-truncate text-truncate-sm d-inline-block">
-                                    智慧綠能科學城
-                                </span>
-                            </a>
-                            <span class="d-inline-block text-truncate text-truncate-sm">沙崙, 臺南市</span>
-                        </div>
                         <img src="img/card-backgrounds/cover-2-lg.png" class="cover" alt="cover">
                         <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle"
                             data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
@@ -164,39 +163,39 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     </div>
                     <ul id="js-nav-menu" class="nav-menu">
                         <li class="active open">
-                            <a href="#" title="電能管理資訊平台" data-filter-tags="電能管理資訊平台">
+                            <a href="#" title="管理平台" data-filter-tags="管理平台">
                                 <i class="fal fa-info-circle"></i>
-                                <span class="nav-link-text" data-i18n="nav.電能管理資訊平台">電能管理資訊平台</span>
+                                <span class="nav-link-text" data-i18n="nav.管理平台">管理平台</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="index.html" title="首頁" data-filter-tags="電能管理資訊平台 首頁">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_首頁">首頁</span>
+                                    <a href="index.html" title="首頁" data-filter-tags="管理平台 首頁">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_首頁">首頁</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="smart_grid.html" title="智能電網" data-filter-tags="電能管理資訊平台 智能電網">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_智能電網">智能電網</span>
+                                    <a href="smart_grid.html" title="智能電網" data-filter-tags="管理平台 智能電網">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_智能電網">智能電網</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="neo_energy.html" title="再生能源" data-filter-tags="電能管理資訊平台 再生能源">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_再生能源">再生能源</span>
+                                    <a href="neo_energy.html" title="再生能源" data-filter-tags="管理平台 再生能源">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_再生能源">再生能源</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="energy_saving.html" title="節電成效" data-filter-tags="電能管理資訊平台 節電成效">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_節電成效">節電成效</span>
+                                    <a href="energy_saving.html" title="節電成效" data-filter-tags="管理平台 節電成效">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_節電成效">節電成效</span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="requirement_management.html" title="需量調控" data-filter-tags="電能管理資訊平台 需量調控">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_需量調控">需量調控</span>
+                                    <a href="requirement_management.html" title="需量調控" data-filter-tags="管理平台 需量調控">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_需量調控">需量調控</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="links.html" title="友善連結" data-filter-tags="電能管理資訊平台 友善連結">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_友善連結">友善連結</span>
+                                    <a href="links.html" title="友善連結" data-filter-tags="管理平台 友善連結">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_友善連結">友善連結</span>
                                     </a>
                                 </li>
                             </ul>
@@ -215,8 +214,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="page-logo">
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                             data-toggle="modal" data-target="#modal-shortcut">
-                            <img src="img/logo.svg" alt="電能管理系統平台" aria-roledescription="logo">
-                            <span class="page-logo-text mr-1">電能管理系統平台</span>
+                            <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
+                            <span class="page-logo-text mr-1">沙崙科學園區</span>
                             <span
                                 class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
@@ -286,11 +285,11 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
                     <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
-                        <li class="breadcrumb-item">電能管理資訊平台</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">沙崙科學園區</a></li>
+                        <li class="breadcrumb-item">管理平台</li>
                         <li class="breadcrumb-item active">需量調控</li>
-                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span
-                                class="js-get-date"></span></li>
+                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date">{{
+                                current }}</span></li>
                     </ol>
                     <div class="subheader">
                         <h1 class="subheader-title">
@@ -1468,7 +1467,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 
     </script>
     <!-- The order of scripts is irrelevant. Please check out the plugin pages for more details about these plugins below: -->
-    <script src="js/dependency/moment/moment.js"></script>
     <script src="js/miscellaneous/fullcalendar/fullcalendar.bundle.js"></script>
     <script src="js/statistics/sparkline/sparkline.bundle.js"></script>
     <script src="js/statistics/easypiechart/easypiechart.bundle.js"></script>
@@ -2098,6 +2096,22 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             calendar.render();
         });
 
+    </script>
+    <script>
+        moment.locale('zh_tw');
+        new Vue({
+            //this targets the div id app
+            el: '#js-page-content',
+            data() {
+                return {
+                    current: moment().format("lll"),
+                };
+            },
+            async mounted() {
+            },
+            methods: {
+            }
+        });
     </script>
 </body>
 <!-- END Body -->

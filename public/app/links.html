@@ -12,7 +12,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <head>
     <meta charset="utf-8">
     <title>
-        友善連結 - 電能管理資訊平台 - 電能管理系統平台 v4.5.1
+        友善連結 - 管理平台 - 沙崙科學園區 v4.5.1
     </title>
     <meta name="description" content="友善連結">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +30,16 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
     <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
+        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <!-- BEGIN Body -->
 <!-- Possible Classes
@@ -125,8 +135,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <div class="page-logo">
                     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                         data-toggle="modal" data-target="#modal-shortcut">
-                        <img src="img/logo.svg" alt="電能管理系統平台" aria-roledescription="logo">
-                        <span class="page-logo-text mr-1">電能管理系統平台</span>
+                        <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
+                        <span class="page-logo-text mr-1">沙崙科學園區</span>
                         <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                         <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
                     </a>
@@ -144,15 +154,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         </div>
                     </div>
                     <div class="info-card">
-                        <img src="img/demo/avatars/logo.svg" class="profile-image" alt="智慧綠能科學城">
-                        <div class="info-card-text">
-                            <a href="#" class="d-flex align-items-center text-white">
-                                <span class="text-truncate text-truncate-sm d-inline-block">
-                                    智慧綠能科學城
-                                </span>
-                            </a>
-                            <span class="d-inline-block text-truncate text-truncate-sm">沙崙, 臺南市</span>
-                        </div>
                         <img src="img/card-backgrounds/cover-2-lg.png" class="cover" alt="cover">
                         <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle"
                             data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
@@ -161,39 +162,39 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     </div>
                     <ul id="js-nav-menu" class="nav-menu">
                         <li class="active open">
-                            <a href="#" title="電能管理資訊平台" data-filter-tags="電能管理資訊平台">
+                            <a href="#" title="管理平台" data-filter-tags="管理平台">
                                 <i class="fal fa-info-circle"></i>
-                                <span class="nav-link-text" data-i18n="nav.電能管理資訊平台">電能管理資訊平台</span>
+                                <span class="nav-link-text" data-i18n="nav.管理平台">管理平台</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="index.html" title="首頁" data-filter-tags="電能管理資訊平台 首頁">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_首頁">首頁</span>
+                                    <a href="index.html" title="首頁" data-filter-tags="管理平台 首頁">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_首頁">首頁</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="smart_grid.html" title="智能電網" data-filter-tags="電能管理資訊平台 智能電網">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_智能電網">智能電網</span>
+                                    <a href="smart_grid.html" title="智能電網" data-filter-tags="管理平台 智能電網">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_智能電網">智能電網</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="neo_energy.html" title="再生能源" data-filter-tags="電能管理資訊平台 再生能源">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_再生能源">再生能源</span>
+                                    <a href="neo_energy.html" title="再生能源" data-filter-tags="管理平台 再生能源">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_再生能源">再生能源</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="energy_saving.html" title="節電成效" data-filter-tags="電能管理資訊平台 節電成效">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_節電成效">節電成效</span>
+                                    <a href="energy_saving.html" title="節電成效" data-filter-tags="管理平台 節電成效">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_節電成效">節電成效</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="requirement_management.html" title="需量調控" data-filter-tags="電能管理資訊平台 需量調控">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_需量調控">需量調控</span>
+                                    <a href="requirement_management.html" title="需量調控" data-filter-tags="管理平台 需量調控">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_需量調控">需量調控</span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="links.html" title="友善連結" data-filter-tags="電能管理資訊平台 友善連結">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_友善連結">友善連結</span>
+                                    <a href="links.html" title="友善連結" data-filter-tags="管理平台 友善連結">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_友善連結">友善連結</span>
                                     </a>
                                 </li>
                             </ul>
@@ -212,8 +213,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="page-logo">
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                             data-toggle="modal" data-target="#modal-shortcut">
-                            <img src="img/logo.svg" alt="電能管理系統平台" aria-roledescription="logo">
-                            <span class="page-logo-text mr-1">電能管理系統平台</span>
+                            <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
+                            <span class="page-logo-text mr-1">沙崙科學園區</span>
                             <span
                                 class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
@@ -283,68 +284,111 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
                     <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
-                        <li class="breadcrumb-item">電能管理資訊平台</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">沙崙科學園區</a></li>
+                        <li class="breadcrumb-item">管理平台</li>
                         <li class="breadcrumb-item active">友善連結</li>
-                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span
-                                class="js-get-date"></span></li>
+                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date">{{
+                                current }}</span></li>
                     </ol>
                     <div class="subheader">
                         <h1 class="subheader-title">
-                            <i class='fal fa-info-circle'></i> Privacy
+                            <i class='fal fa-info-circle'></i> 友善連結
                             <small>
-                                SmartAdmin Privacy
+                                相關網站連結
                             </small>
                         </h1>
                     </div>
-                    <div class="fs-lg fw-300 p-5 bg-white border-faded rounded mb-g">
-                        <h2>Privacy</h2>
-                        <p class="mb-g">
-                            Your privacy is important to us at SmartAdmin and the protection, confidentiality and
-                            integrity of your personal data are our prime concerns.
-                            We will only use your personal information to administer your account, provide the products
-                            and services you have requested from us, and to keep you informed about our products and
-                            services (if you have consented to this).
-                            We only use your data for the purposes for which it was collected and, where relevant, to
-                            meet local legal obligations.
-                            We will retain your personal information only for as long as is necessary for the purposes
-                            for which the information was collected, or as long as is required pursuant to law.
-                        </p>
-                        <h3>Cookies and other similar technologies</h3>
-                        <p>
-                            We collect certain data through cookies and similar technologies (e.g. web beacons, tags,
-                            device identifiers). Cookies are text files placed on your computer to collect standard
-                            internet log information and visitor behaviour information. This information is used to
-                            track visitor use of the website and to compile statistical reports on website activity. We
-                            register your interaction with our services in order to improve our website, content and
-                            services. Our use of such technologies and the data collected is described in more detail in
-                            our Cookie Policy. You can manage your cookie preferences through your browser settings.
-                        </p>
+                    <div class="row text-center">
+                        <div class="col-sm-12 col-xl-4">
+                            <div class="p-3 bg-primary-100 rounded overflow-hidden position-relative text-white mb-g">
+                                <img src="img/tncity.png" alt="台南市政府" aria-roledescription="台南市政府">
+                                <div class="">
+                                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                                        台南市政府
+                                        <small class="m-0 l-h-n"><a
+                                                href="https://www.tainan.gov.tw/">https://www.tainan.gov.tw/</a></small>
+                                    </h3>
+                                </div>
+                                <i class="fal fa-user position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1"
+                                    style="font-size:6rem"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xl-4">
+                            <div class="p-3 bg-primary-100 rounded overflow-hidden position-relative text-white mb-g">
+                                <div class="">
+                                    <img src="img/tnec.png" alt="台南市經濟發展局" aria-roledescription="台南市經濟發展局">
+                                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                                        台南市經濟發展局
+                                        <small class="m-0 l-h-n"><a
+                                                href="https://economic.tainan.gov.tw/">https://economic.tainan.gov.tw/</a></small>
+                                    </h3>
+                                </div>
+                                <i class="fal fa-gem position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4"
+                                    style="font-size: 6rem;"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xl-4">
+                            <div class="p-3 bg-primary-100 rounded overflow-hidden position-relative text-white mb-g">
+                                <div class="">
+                                    <img src="img/mebe.png" class="img-fluid" alt="經濟部能源局"
+                                        aria-roledescription="經濟部能源局">
+                                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                                        經濟部能源局
+                                        <small class="m-0 l-h-n"><a
+                                                href="https://www.moeaboe.gov.tw">https://www.moeaboe.gov.tw</a></small>
+                                    </h3>
+                                </div>
+                                <i class="fal fa-lightbulb position-absolute pos-right pos-bottom opacity-15 mb-n5 mr-n6"
+                                    style="font-size: 8rem;"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xl-4">
+                            <div class="p-3 bg-primary-100 rounded overflow-hidden position-relative text-white mb-g">
+                                <div class="">
+                                    <img src="img/taipower.png" alt="台灣電力公司" aria-roledescription="台灣電力公司">
+                                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                                        台灣電力公司
+                                        <small class="m-0 l-h-n"><a
+                                                href="https://www.taipower.com.tw/">https://www.taipower.com.tw/</a></small>
+                                    </h3>
+                                </div>
+                                <i class="fal fa-globe position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4"
+                                    style="font-size: 6rem;"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xl-4">
+                            <div class="p-3 bg-primary-100 rounded overflow-hidden position-relative text-white mb-g">
+                                <div class="">
+                                    <img src="img/solar.png" alt="太陽光電單一服務窗口" aria-roledescription="太陽光電單一服務窗口">
+                                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                                        太陽光電單一服務窗口
+                                        <small class="m-0 l-h-n"><a
+                                                href="https://www.mrpv.org.tw/">https://www.mrpv.org.tw/</a></small>
+                                    </h3>
+                                </div>
+                                <i class="fal fa-globe position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4"
+                                    style="font-size: 6rem;"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-xl-4">
+                            <div class="p-3 bg-primary-100 rounded overflow-hidden position-relative text-white mb-g">
+                                <div class="">
+                                    <img src="img/energy_park.png" alt="節約能源園區" aria-roledescription="節約能源園區">
+                                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                                        節約能源園區
+                                        <small class="m-0 l-h-n"><a
+                                                href="https://www.energypark.org.tw/">https://www.energypark.org.tw/</a></small>
+                                    </h3>
+                                </div>
+                                <i class="fal fa-globe position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4"
+                                    style="font-size: 6rem;"></i>
+                            </div>
+                        </div>
                     </div>
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
                 <!-- END Page Content -->
-                <!-- BEGIN Page Footer -->
-                <footer class="page-footer" role="contentinfo">
-                    <div class="d-flex align-items-center flex-1 text-muted">
-                        <span class="hidden-md-down fw-700">2021 © 昱山環境 by&nbsp;<a href='https://www.wecc.com.tw'
-                                class='text-primary fw-500' title='www.wecc.com.tw' target='_blank'>昱山環境</a></span>
-                    </div>
-                    <div>
-                        <ul class="list-table m-0">
-                            <li><a href="intel_introduction.html" class="text-secondary fw-700">About</a></li>
-                            <li class="pl-3"><a href="info_app_licensing.html" class="text-secondary fw-700">License</a>
-                            </li>
-                            <li class="pl-3"><a href="info_app_docs.html"
-                                    class="text-secondary fw-700">Documentation</a></li>
-                            <li class="pl-3 fs-xl"><a href="https://wrapbootstrap.com/user/MyOrange"
-                                    class="text-secondary" target="_blank"><i class="fal fa-question-circle"
-                                        aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </footer>
-                <!-- END Page Footer -->
                 <!-- BEGIN Shortcuts -->
                 <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog"
                     aria-labelledby="modal-shortcut" aria-hidden="true">
@@ -932,6 +976,22 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 						+ src/../jquery-snippets.js (core) -->
     <script src="js/vendors.bundle.js"></script>
     <script src="js/app.bundle.js"></script>
+    <script>
+        moment.locale('zh_tw');
+        new Vue({
+            //this targets the div id app
+            el: '#js-page-content',
+            data() {
+                return {
+                    current: moment().format("lll"),
+                };
+            },
+            async mounted() {
+            },
+            methods: {
+            }
+        });
+    </script>
 </body>
 <!-- END Body -->
 

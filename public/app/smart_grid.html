@@ -7,12 +7,12 @@ Website: http://gootbootstrap.com
 Purchase: https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0?ref=myorange
 License: You must have a valid license purchased only from wrapbootstrap.com (link above) in order to legally use this theme for your project.
 -->
-<html lang="en">
+<html lang="zh-tw">
 
 <head>
     <meta charset="utf-8">
     <title>
-        智能電網 - 電能管理資訊平台 - 電能管理系統平台 v4.5.1
+        智能電網 - 管理平台 - 沙崙科學園區 v4.5.1
     </title>
     <meta name="description" content="智能電網">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +30,15 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
     <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+        integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
+        integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <!-- BEGIN Body -->
 <!-- Possible Classes
@@ -125,8 +134,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <div class="page-logo">
                     <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                         data-toggle="modal" data-target="#modal-shortcut">
-                        <img src="img/logo.svg" alt="電能管理系統平台" aria-roledescription="logo">
-                        <span class="page-logo-text mr-1">電能管理系統平台</span>
+                        <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
+                        <span class="page-logo-text mr-1">沙崙科學園區</span>
                         <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                         <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
                     </a>
@@ -144,15 +153,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         </div>
                     </div>
                     <div class="info-card">
-                        <img src="img/demo/avatars/logo.svg" class="profile-image" alt="智慧綠能科學城">
-                        <div class="info-card-text">
-                            <a href="#" class="d-flex align-items-center text-white">
-                                <span class="text-truncate text-truncate-sm d-inline-block">
-                                    智慧綠能科學城
-                                </span>
-                            </a>
-                            <span class="d-inline-block text-truncate text-truncate-sm">沙崙, 臺南市</span>
-                        </div>
                         <img src="img/card-backgrounds/cover-2-lg.png" class="cover" alt="cover">
                         <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle"
                             data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
@@ -161,39 +161,39 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     </div>
                     <ul id="js-nav-menu" class="nav-menu">
                         <li class="active open">
-                            <a href="#" title="電能管理資訊平台" data-filter-tags="電能管理資訊平台">
+                            <a href="#" title="管理平台" data-filter-tags="管理平台">
                                 <i class="fal fa-info-circle"></i>
-                                <span class="nav-link-text" data-i18n="nav.電能管理資訊平台">電能管理資訊平台</span>
+                                <span class="nav-link-text" data-i18n="nav.管理平台">管理平台</span>
                             </a>
                             <ul>
                                 <li>
-                                    <a href="index.html" title="首頁" data-filter-tags="電能管理資訊平台 首頁">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_首頁">首頁</span>
+                                    <a href="index.html" title="首頁" data-filter-tags="管理平台 首頁">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_首頁">首頁</span>
                                     </a>
                                 </li>
                                 <li class="active">
-                                    <a href="smart_grid.html" title="智能電網" data-filter-tags="電能管理資訊平台 智能電網">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_智能電網">智能電網</span>
+                                    <a href="smart_grid.html" title="智能電網" data-filter-tags="管理平台 智能電網">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_智能電網">智能電網</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="neo_energy.html" title="再生能源" data-filter-tags="電能管理資訊平台 再生能源">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_再生能源">再生能源</span>
+                                    <a href="neo_energy.html" title="再生能源" data-filter-tags="管理平台 再生能源">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_再生能源">再生能源</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="energy_saving.html" title="節電成效" data-filter-tags="電能管理資訊平台 節電成效">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_節電成效">節電成效</span>
+                                    <a href="energy_saving.html" title="節電成效" data-filter-tags="管理平台 節電成效">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_節電成效">節電成效</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="requirement_management.html" title="需量調控" data-filter-tags="電能管理資訊平台 需量調控">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_需量調控">需量調控</span>
+                                    <a href="requirement_management.html" title="需量調控" data-filter-tags="管理平台 需量調控">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_需量調控">需量調控</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="links.html" title="友善連結" data-filter-tags="電能管理資訊平台 友善連結">
-                                        <span class="nav-link-text" data-i18n="nav.電能管理資訊平台_友善連結">友善連結</span>
+                                    <a href="links.html" title="友善連結" data-filter-tags="管理平台 友善連結">
+                                        <span class="nav-link-text" data-i18n="nav.管理平台_友善連結">友善連結</span>
                                     </a>
                                 </li>
                             </ul>
@@ -212,8 +212,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="page-logo">
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
                             data-toggle="modal" data-target="#modal-shortcut">
-                            <img src="img/logo.svg" alt="電能管理系統平台" aria-roledescription="logo">
-                            <span class="page-logo-text mr-1">電能管理系統平台</span>
+                            <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
+                            <span class="page-logo-text mr-1">沙崙科學園區</span>
                             <span
                                 class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
@@ -283,177 +283,27 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
                     <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
-                        <li class="breadcrumb-item">電能管理資訊平台</li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">沙崙科學園區</a></li>
+                        <li class="breadcrumb-item">管理平台</li>
                         <li class="breadcrumb-item active">智能電網</li>
-                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span
-                                class="js-get-date"></span></li>
+                        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date">{{
+                                current }}</span></li>
                     </ol>
                     <div class="subheader">
                         <h1 class="subheader-title">
-                            <i class='fal fa-info-circle'></i> Introduction
+                            <i class='fal fa-info-circle'></i> 智能電網
                             <small>
-                                A brief introduction to this WebApp
+                                節能減碳, 隔離事故，自我修復
                             </small>
                         </h1>
                     </div>
                     <div class="fs-lg fw-300 p-5 bg-white border-faded rounded mb-g">
-                        <h3 class="mb-g">
-                            Hi Everyone,
-                        </h3>
-                        <p>
-                            Some time ago we asked for your input, whether you were a seasoned 電能管理系統平台 user or just
-                            peeking around the corner, and WOW, did you deliver! After reading each and everyone of your
-                            replies on the survey, we have taken each piece of praise and criticism to heart to scope
-                            out our plans for 電能管理系統平台. All feedback will be used to make your favorite theme that much
-                            better, but these were some of the highlights.
-                        </p>
-                        <p>
-                            A whopping 72% of you said you were ready for a fresh new design, while 電能管理系統平台 is and a
-                            revolutionary view on what a good bootstrap based template should be, having something new
-                            to look at can make anyone feel invigorated. And let's be honest, who doesn't like a modern
-                            update of your favorite theme! While most you are still happy with the current variations,
-                            around 50% of you have asked for vue.js support. With this framework rapidly gaining
-                            popularity it is surely one to include in the family of frameworks! And, last, but certainly
-                            not least, a very large majority of a staggering 90% wanted more plugins and regular
-                            updates.
-                        </p>
-                        <p>
-                            SmartAdmin takes great care to ensure that valuable and popular plugins are supported as
-                            much as possible on a drop-in basis, meaning without doing heavy modifications to extend the
-                            look and feel of your favorite admin template :) . And if the plugin is in demand enough, we
-                            won't hesitate to put in the hours to support the look and feel of 電能管理系統平台.
-                        </p>
-                        <p>
-                            But how you ask? Well in order to make the next version of 電能管理系統平台 the best ever and to
-                            re-deliver on our promise of continued support and quality, we wrote the theme from the
-                            ground-up using the latest Bootstrap practises. As a result we are better able to support
-                            new frameworks as they come up and ensure that plugin support is quick and reliable. In
-                            addition we have partnered up with some of the communities best developers to ensure that
-                            our tailor made variations are of top-notch quality and follow the principles that we at
-                            電能管理系統平台 take to heart.
-                        </p>
-                        <p>
-                            We're really confident that 電能管理系統平台 4.0 will bring back that first theme experience while
-                            still keeping the familiarity that you have grown used to. It's a brand new theme, but with
-                            all the things you love and then some. And to ensure that you our loyal customers get this
-                            experience first-hand, we will be publishing the HTML update free-of-charge as an update to
-                            your current 電能管理系統平台 license!
-                        </p>
-                        <p>
-                            Last but not least, we would like to thank each and everyone of you, our loyal customers,
-                            for your patience and continued support in 電能管理系統平台. Without you this would not have been
-                            possible!
-                        </p>
-                        <p>
-                            Sincerely,<br>
-                            The 電能管理系統平台 Team<br>
-                        </p>
+                        <b-img src="img/smartGrid.png" fluid />
                     </div>
-                    <h3>
-                        SmartAdmin Team
-                        <small class="mb-0">We build cool things...</small>
-                    </h3>
-                    <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
-                        <div
-                            class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                            <img src="img/demo/authors/sunny.png" alt="Sunny A."
-                                class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                            <div class="ml-2 mr-3">
-                                <h5 class="m-0">
-                                    Sunny A. (UI/UX Expert)
-                                    <small class="m-0 fw-300">
-                                        Lead Author
-                                    </small>
-                                </h5>
-                                <a href="https://twitter.com/@myplaneticket" class="text-info fs-sm"
-                                    target="_blank">@myplaneticket</a> -
-                                <a href="https://wrapbootstrap.com/user/myorange" class="text-info fs-sm"
-                                    target="_blank" title="Contact Sunny"><i class="fal fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                            <img src="img/demo/authors/josh.png" alt="Jos K."
-                                class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                            <div class="ml-2 mr-3">
-                                <h5 class="m-0">
-                                    Jos K. (ASP.NET Developer)
-                                    <small class="m-0 fw-300">
-                                        Partner &amp; Contributor
-                                    </small>
-                                </h5>
-                                <a href="https://twitter.com/@atlantez" class="text-info fs-sm"
-                                    target="_blank">@atlantez</a> -
-                                <a href="https://wrapbootstrap.com/user/Walapa" class="text-info fs-sm" target="_blank"
-                                    title="Contact Jos"><i class="fal fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                            <img src="img/demo/authors/jovanni.png" alt="Jovanni Lo"
-                                class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                            <div class="ml-2 mr-3">
-                                <h5 class="m-0">
-                                    Jovanni L. (PHP Developer)
-                                    <small class="m-0 fw-300">
-                                        Partner &amp; Contributor
-                                    </small>
-                                </h5>
-                                <a href="https://twitter.com/@lodev09" class="text-info fs-sm"
-                                    target="_blank">@lodev09</a> -
-                                <a href="https://wrapbootstrap.com/user/lodev09" class="text-info fs-sm" target="_blank"
-                                    title="Contact Jovanni"><i class="fal fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <div
-                            class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
-                            <img src="img/demo/authors/roberto.png" alt="Jovanni Lo"
-                                class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
-                            <div class="ml-2 mr-3">
-                                <h5 class="m-0">
-                                    Roberto R. (Rails Developer)
-                                    <small class="m-0 fw-300">
-                                        Partner &amp; Contributor
-                                    </small>
-                                </h5>
-                                <a href="https://twitter.com/@sildur" class="text-info fs-sm"
-                                    target="_blank">@sildur</a> -
-                                <a href="https://wrapbootstrap.com/user/sildur" class="text-info fs-sm" target="_blank"
-                                    title="Contact Roberto"><i class="fal fa-envelope"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="fs-lg">
-                        <a href="#" class="fw-500 fs-xl">> Ready to join our dedicated team?</a><br>
-                        We are always on the lookout to expand and add unique app flavors to SmartAdmin. If you think
-                        you can contribute and create your very own flavors, get in touch with us or <a href="#"
-                            target="_blank">click here to learn more</a> about our partnership program.
-                    </p>
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
                 <!-- END Page Content -->
-                <!-- BEGIN Page Footer -->
-                <footer class="page-footer" role="contentinfo">
-                    <div class="d-flex align-items-center flex-1 text-muted">
-                        <span class="hidden-md-down fw-700">2021 © 昱山環境 by&nbsp;<a href='https://www.wecc.com.tw'
-                                class='text-primary fw-500' title='www.wecc.com.tw' target='_blank'>昱山環境</a></span>
-                    </div>
-                    <div>
-                        <ul class="list-table m-0">
-                            <li><a href="intel_introduction.html" class="text-secondary fw-700">About</a></li>
-                            <li class="pl-3"><a href="info_app_licensing.html" class="text-secondary fw-700">License</a>
-                            </li>
-                            <li class="pl-3"><a href="info_app_docs.html"
-                                    class="text-secondary fw-700">Documentation</a></li>
-                            <li class="pl-3 fs-xl"><a href="https://wrapbootstrap.com/user/MyOrange"
-                                    class="text-secondary" target="_blank"><i class="fal fa-question-circle"
-                                        aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </footer>
-                <!-- END Page Footer -->
                 <!-- BEGIN Shortcuts -->
                 <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog"
                     aria-labelledby="modal-shortcut" aria-hidden="true">
@@ -1041,6 +891,23 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 						+ src/../jquery-snippets.js (core) -->
     <script src="js/vendors.bundle.js"></script>
     <script src="js/app.bundle.js"></script>
+    <script>
+        moment.locale('zh_tw');
+        new Vue({
+            //this targets the div id app
+            el: '#js-page-content',
+            data() {
+                return {
+                    current: moment().format("lll"),
+                };
+            },
+            async mounted() {
+            },
+            methods: {
+            }
+        });
+    </script>
+
 </body>
 <!-- END Body -->
 
