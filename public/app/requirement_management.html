@@ -294,7 +294,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="subheader">
                         <h1 class="subheader-title">
                             <i class='subheader-icon fal fa-chart-area'></i> 需量調控 <span class='fw-300'></span>
-                        </h1>                        
+                        </h1>
                         <div class="subheader-block d-lg-flex align-items-center">
                             <div class="d-inline-flex flex-column justify-content-center mr-3">
                                 <span class="fw-300 fs-xs d-block opacity-50">
@@ -321,23 +321,26 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 sparkHeight="32px" sparkBarWidth="5px" values="1,4,3,6,5,3,9,6,5,9,7"></span>
                         </div>
                     </div>
-                    <b-card no-body>
-                        <b-tabs card content-class="mt-3" fill>
-                            <b-tab title="總覽" active>
-                                <b-row>
-                                    <b-col cols="12" lg="6">
-                                        <b-img src="img/req1.png" fluid-grow />
-                                    </b-col>
-                                    <b-col cols="12" lg="6">
-                                        <b-img src="img/req2.png" fluid-grow />
-                                    </b-col>
-                                </b-row>
-                            </b-tab>
-                            <b-tab title="投標及抑低建議" disabled> </b-tab>
-                            <b-tab title="今日執行情形" disabled> </b-tab>
-                            <b-tab title="得標與執行紀錄" disabled></b-tab>
-                        </b-tabs>
-                    </b-card>
+                    <b-container fluid>
+                        <b-card no-body>
+                            <b-tabs card fill>
+                                <b-tab nobody title="總覽" active>
+                                    <b-row>
+                                        <b-col cols="12" lg="6">
+                                            <b-img src="img/req1.png" fluid-grow />
+                                        </b-col>
+                                        <b-col cols="12" lg="6">
+                                            <b-img src="img/req2.png" fluid-grow />
+                                        </b-col>
+                                    </b-row>
+                                </b-tab>
+                                <b-tab title="投標及抑低建議" disabled> </b-tab>
+                                <b-tab title="今日執行情形" disabled> </b-tab>
+                                <b-tab title="得標與執行紀錄" disabled></b-tab>
+                            </b-tabs>
+                        </b-card>
+                    </b-container>
+
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
