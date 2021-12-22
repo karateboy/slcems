@@ -1432,11 +1432,40 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             data() {
                 return {
                     current: moment().format("lll"),
+                    weatherForecast: '',
+                    weatherUrl: '',
                 };
             },
             async mounted() {
+                await this.getWeatherReport();
             },
             methods: {
+                async getWeatherReport() {
+                    try {
+                        let url = `${location.protocol}//${location.host}/WeatherReport`
+                        console.log(url);
+                        const resp = await axios.get(url);
+                        console.log(resp)
+                        if (resp.status === 200) {
+                            this.weatherForecast = '';
+                            let weatherElements =
+                                resp.data.records.locations[0].location[0].weatherElement;
+                            let desc = weatherElements.find(
+                                p => p.elementName === 'WeatherDescription',
+                            );
+                            if (desc !== undefined) {
+                                this.weatherForecast += desc.time[0].elementValue[0].value;
+                            }
+
+                            let wx = weatherElements.find(p => p.elementName === 'Wx');
+                            if (wx !== undefined) {
+                                this.weatherUrl = `https://www.cwb.gov.tw/V8/assets/img/weather_icons/weathers/svg_icon/day/${wx.time[0].elementValue[1].value}.svg`;
+                            }
+                        }
+                    } catch (err) {
+                        throw new Error('fail to get weather report');
+                    }
+                },
             }
         });
     </script>

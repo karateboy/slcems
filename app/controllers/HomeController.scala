@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient, system: ActorSystem)
   extends AbstractController(cc) with Logging {
-  //val buildingCollector = system.actorOf(RDbuildingCollector.props(), "rdbuildingCollector")
+  val buildingCollector = system.actorOf(RDbuildingCollector.props(wsClient), "rdbuildingCollector")
   /**
    * Create an Action to render an HTML page.
    *
