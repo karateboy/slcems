@@ -284,7 +284,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <!-- the #js-page-content id is needed for some plugins to initialize -->
                 <main id="js-page-content" role="main" class="page-content">
                     <ol class="breadcrumb page-breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">沙崙科學園區</a></li>
                         <li class="breadcrumb-item">管理平台</li>
                         <li class="breadcrumb-item active">節電成效</li>
                         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date">{{
@@ -300,20 +300,20 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     </div>
                     <b-row class="match-height">
                         <b-col cols="12" md="6" xl="4">
-                            <b-card img-src="img/energy-saving.png" overlay>
+                            <b-card img-src="img/energy-saving.jpg" overlay class="text-center">
                                 <b-card-title>
-                                    <h2><strong>能耗指標</strong></h2>
+                                    <h2 class="text-white"><strong>能耗指標</strong></h2>
                                 </b-card-title>
-                                <h3>
+                                <h3 class="text-white">
                                     平均EUI <span class="highlight">2,347</span> (kWh/m<sup>2</sup>)
                                 </h3>
-                                <h3>平均節電綠 <span class="highlight">6</span> %</h3>
+                                <h3 class="text-white">平均節電綠 <span class="highlight">6</span> %</h3>
                             </b-card>
                         </b-col>
                         <b-col cols="12" md="6" xl="4">
-                            <b-card img-src="img/solar.jpg" overlay>
+                            <b-card img-src="img/solar.jpg" overlay class="text-center">
                                 <b-card-title>
-                                    <h2><strong>綠電指標</strong></h2>
+                                    <h2 class="text-white"><strong>綠電指標</strong></h2>
                                 </b-card-title>
                                 <h3 class="text-white">
                                     綠電使用滲透率 <span class="highlight">54.3</span> (%)
@@ -327,7 +327,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                             </b-card>
                         </b-col>
                         <b-col cols="12" md="6" xl="4">
-                            <b-card img-src="img/forest.jpg" text-variant="info" overlay>
+                            <b-card img-src="img/forest.jpg" text-variant="info" overlay class="text-center">
                                 <b-card-title>
                                     <h2 class="text-white"><strong>節能減碳量</strong></h2>
                                 </b-card-title>
@@ -336,9 +336,11 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 </h3>
                             </b-card>
                         </b-col>
+                    </b-row>
+                    <b-row class="pt-3">
                         <b-col cols="12">
                             <b-card no-body>
-                                <b-table :items="companyTable" />
+                                <b-table :items="companyTable" :fields="fields" />
                             </b-card>
                         </b-col>
                     </b-row>
@@ -512,76 +514,59 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             //this targets the div id app
             el: '#js-page-content',
             data() {
+                let fields = [
+                    {
+                        key: "no",
+                        label: "編號"
+                    },
+                    {
+                        key: "title",
+                        label: "場館區域"
+                    },
+                    {
+                        key: "lastMonth",
+                        label: "上月節電率"
+                    },
+                    {
+                        key: "grow",
+                        label: "成長"
+                    },
+                ]
                 let companyTable = [
                     {
                         no: '1',
                         title: '台灣智駕測試實驗室',
-                        subtitle: 'meguc@ruj.io',
-                        avatarIcon: 'MonitorIcon',
-                        avatarColor: 'light-primary',
-                        avatarTitle: 'Technology',
-                        viewTitle: '5%',
-                        viewsub: 'in 24 hours',
-                        revenue: '891.2',
-                        sales: '68',
-                        loss: false,
+                        lastMonth: 'N/A',
+                        grow: "N/A",
                     },
-                    {                        
+                    {
                         no: '2',
                         title: '智慧綠能循環住宅園區',
-                        subtitle: 'vecav@hodzi.co.uk',
-                        avatarIcon: 'CoffeeIcon',
-                        avatarColor: 'light-success',
-                        avatarTitle: 'Grocery',
-                        viewTitle: '4%',
-                        viewsub: 'in 2 days',
-                        revenue: '668.51',
-                        sales: '97',
-                        loss: true,
+                        lastMonth: 'N/A',
+                        grow: "N/A",
                     },
-                    {                     
+                    {
                         no: 'C',
                         title: '聯合研究中心',
-                        subtitle: 'davcilse@is.gov',
-                        avatarIcon: 'WatchIcon',
-                        avatarColor: 'light-warning',
-                        avatarTitle: 'Fashion',
-                        viewTitle: '2%',
-                        viewsub: 'in 5 days',
-                        revenue: '522.29',
-                        sales: '62',
-                        loss: false,
+                        lastMonth: 'N/A',
+                        grow: "N/A",
                     },
-                    {                     
+                    {
                         no: 'D',
                         title: '示範場域',
-                        subtitle: 'us@cuhil.gov',
-                        avatarIcon: 'MonitorIcon',
-                        avatarColor: 'light-primary',
-                        avatarTitle: 'Technology',
-                        viewTitle: '-2%',
-                        viewsub: 'in 24 hours',
-                        revenue: '291.01',
-                        sales: '88',
-                        loss: false,
+                        lastMonth: 'N/A',
+                        grow: "N/A",
                     },
-                    {                     
+                    {
                         no: 'E',
                         title: '中研院南部院區',
-                        subtitle: 'pudais@jife.com',
-                        avatarIcon: 'CoffeeIcon',
-                        avatarColor: 'light-success',
-                        avatarTitle: 'Grocery',
-                        viewTitle: '6%',
-                        viewsub: 'in 1 week',
-                        revenue: '783.93',
-                        sales: '16',
-                        loss: true,
+                        lastMonth: 'N/A',
+                        grow: "N/A",
                     },
                 ];
-                console.log(companyTable);
                 return {
-                    companyTable: companyTable,
+                    fields,
+                    companyTable,
                     current: moment().format("lll"),
                 };
             },
