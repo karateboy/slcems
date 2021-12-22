@@ -1,7 +1,7 @@
 package models
 
 import akka.actor.{Actor, Cancellable, Props}
-import models.RDbuildingCollector.ParseWebInfo
+import models.RdCenterCollector.ParseWebInfo
 import play.api.Logging
 import play.api.libs.json.{JsError, Json}
 import play.api.libs.ws.WSClient
@@ -13,13 +13,13 @@ import scala.concurrent.duration.{FiniteDuration, MINUTES, SECONDS}
 import scala.util.Failure
 
 
-object RDbuildingCollector {
-  def props(wsClient: WSClient) = Props(classOf[RDbuildingCollector], wsClient)
+object RdCenterCollector {
+  def props(wsClient: WSClient) = Props(classOf[RdCenterCollector], wsClient)
 
   case object ParseWebInfo
 }
 
-class RDbuildingCollector @Inject()(wsClient: WSClient) extends Actor with Logging {
+class RdCenterCollector @Inject()(wsClient: WSClient) extends Actor with Logging {
   self ! ParseWebInfo
   val timer: Cancellable = {
     def getNextTime(period: Int) = {
@@ -55,8 +55,7 @@ class RDbuildingCollector @Inject()(wsClient: WSClient) extends Actor with Loggi
         implicit val r2 = Json.reads[GeneralData]
         implicit val r1 = Json.reads[GeneralStatus]
         for (ret <- f) {
-          logger.info(ret.body)
-          val statusRet = ret.json.validate[GeneralData]
+          val statusRet = ret.json.validate[GeneralStatus]
           statusRet.fold(
             err => {
               logger.error(JsError(err).toString)
@@ -70,6 +69,10 @@ class RDbuildingCollector @Inject()(wsClient: WSClient) extends Actor with Loggi
         case ex: Exception =>
           logger.error("error", ex)
       }
+  }
 
+  override def postStop(): Unit = {
+    timer.cancel()
+    super.postStop()
   }
 }

@@ -15,7 +15,7 @@ import play.api.libs.concurrent.AkkaGuiceSupport
 class Module extends AbstractModule with AkkaGuiceSupport with Logging {
   logger.info("Module")
   override def configure() = {
-    bindActor[RDbuildingCollector]("rdbuildingCollect")
+    bindActor[RdCenterCollector]("rdbuildingCollect")
   }
 
 }
