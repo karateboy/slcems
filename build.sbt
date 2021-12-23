@@ -1,5 +1,5 @@
 lazy val root = (project in file("."))
-  .enablePlugins(PlayScala, SwaggerPlugin)
+  .enablePlugins(PlayScala, SwaggerPlugin, LauncherJarPlugin)
   .settings(
     name := """slcems""",
     organization := "com.wecc",

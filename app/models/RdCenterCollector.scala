@@ -1,6 +1,7 @@
 package models
 
 import akka.actor.{Actor, Cancellable, Props}
+import controllers.PowerStatus
 import models.RdCenterCollector.ParseWebInfo
 import play.api.Logging
 import play.api.libs.json.{JsError, Json}
@@ -9,17 +10,40 @@ import play.api.libs.ws.WSClient
 import java.time.LocalTime
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 import scala.concurrent.duration.{FiniteDuration, MINUTES, SECONDS}
 import scala.util.Failure
 
+case class GeneralData(grid: String, pv: String, building: String, ess: String, ev: String)
+case class GeneralStatus(status: Boolean, data: Seq[GeneralData])
 
-object RdCenterCollector {
+object RdCenterCollector extends Logging {
   def props(wsClient: WSClient) = Props(classOf[RdCenterCollector], wsClient)
+  implicit val r2 = Json.reads[GeneralData]
+  implicit val r1 = Json.reads[GeneralStatus]
 
+  def getGeneralPowerStatus(wsClient: WSClient) = {
+    try {
+      val f = wsClient.url("https://stb.stpi.narl.org.tw/general").get()
+
+      for (ret <- f) yield {
+        for(status<-ret.json.validate[GeneralStatus].asOpt if status.status && status.data.nonEmpty) yield {
+            PowerStatus("聯合研究中心", status.data(0).pv.toDouble, status.data(0).ess.toDouble, status.data(0).building.toDouble)
+        }
+      }
+    } catch {
+      case ex: Exception =>
+        Future{
+          logger.error("error", ex)
+          None
+        }
+    }
+  }
   case object ParseWebInfo
 }
 
 class RdCenterCollector @Inject()(wsClient: WSClient) extends Actor with Logging {
+  import RdCenterCollector._
   self ! ParseWebInfo
   val timer: Cancellable = {
     def getNextTime(period: Int) = {
@@ -37,9 +61,6 @@ class RdCenterCollector @Inject()(wsClient: WSClient) extends Actor with Logging
       FiniteDuration(15, MINUTES), self, ParseWebInfo)
   }
 
-  case class GeneralData(grid: String, pv: String, building: String, ess: String, ev: String)
-
-  case class GeneralStatus(status: Boolean, data: Seq[GeneralData])
 
   override def receive: Receive = {
     case ParseWebInfo =>
@@ -52,8 +73,6 @@ class RdCenterCollector @Inject()(wsClient: WSClient) extends Actor with Logging
 
         })
 
-        implicit val r2 = Json.reads[GeneralData]
-        implicit val r1 = Json.reads[GeneralStatus]
         for (ret <- f) {
           val statusRet = ret.json.validate[GeneralStatus]
           statusRet.fold(

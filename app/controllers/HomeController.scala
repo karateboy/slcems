@@ -9,6 +9,9 @@ import play.api.libs.ws._
 
 import javax.inject._
 import scala.concurrent.ExecutionContext.Implicits.global
+
+case class PowerStatus(name: String, generating: Double, storing: Double, consuming: Double)
+case class PowerStatusSummary(summary: Seq[PowerStatus])
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
@@ -17,6 +20,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient, system: ActorSystem)
   extends AbstractController(cc) with Logging {
   val buildingCollector = system.actorOf(RdCenterCollector.props(wsClient), "rdbuildingCollector")
+  implicit val w1 = Json.writes[PowerStatus]
+  implicit val w2 = Json.writes[PowerStatusSummary]
   /**
    * Create an Action to render an HTML page.
    *
@@ -44,8 +49,6 @@ class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient, sys
     val body: AnyContent = request.body
     val jsonBody: Option[JsValue] = body.asJson
     implicit val reads: Reads[LoginParam] = Json.reads[LoginParam]
-
-
 
     jsonBody
       .map { json =>
@@ -96,6 +99,16 @@ class HomeController @Inject()(cc: ControllerComponents, wsClient: WSClient, sys
       implicit val r1 = Json.reads[WeatherForecastRecords]
       //ret.json.validate[WeatherForecastRecords]
       Ok(Json.toJson(ret.json))
+    }
+  }
+
+  def realtimeStatus = Action.async {
+    for(status<-RdCenterCollector.getGeneralPowerStatus(wsClient)) yield {
+      if(status.nonEmpty){
+        Ok(Json.toJson(PowerStatusSummary(summary = Seq(status.get))))
+      }else{
+        Ok(Json.toJson(PowerStatusSummary(summary = Seq.empty[PowerStatus])))
+      }
     }
   }
 }

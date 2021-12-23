@@ -358,6 +358,15 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                 </div>
                                             </div>
                                             <div class="col-lg-5 col-xl-4 pl-lg-3">
+                                                <div class="d-flex">
+                                                    聯合研究中心(產出/消耗)
+                                                    <span class="d-inline-block ml-auto">{{getPowerGenerating(0)}}/{{getPowerConsumping(0)}} KW</span>
+                                                </div>
+                                                <div class="progress progress-sm mb-3">
+                                                    <div class="progress-bar bg-success-500" role="progressbar"
+                                                        :style="`width: ${getGreenPercentageStr(0)};`" aria-valuenow="34" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
                                                 <div class="d-flex mt-2">
                                                     台灣智駕測試實驗室(尚未連線)
                                                     <span class="d-inline-block ml-auto">N/A</span>
@@ -365,16 +374,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-fusion-400" role="progressbar"
                                                         style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                                </div>
-
-                                                <div class="d-flex">
-                                                    聯合研究中心
-                                                    <span class="d-inline-block ml-auto">100 KW</span>
-                                                </div>
-                                                <div class="progress progress-sm mb-3">
-                                                    <div class="progress-bar bg-success-500" role="progressbar"
-                                                        style="width: 50%;" aria-valuenow="34" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
@@ -387,12 +386,12 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
-                                                    示範場域
-                                                    <span class="d-inline-block ml-auto">100 KW</span>
+                                                    示範場域 (尚未連線)
+                                                    <span class="d-inline-block ml-auto">N/A</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-success-500" role="progressbar"
-                                                        style="width: 84%;" aria-valuenow="84" aria-valuemin="0"
+                                                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
@@ -434,6 +433,22 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <div class="row row-grid no-gutters">
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
+                                                    <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center"
+                                                        :data-percent='`${50}`' data-piesize="50" data-linewidth="5"
+                                                        data-linecap="butt">
+                                                        <div
+                                                            class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
+                                                            <span class="js-percent d-block text-dark"></span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="d-inline-block ml-2 text-muted">
+                                                        聯合研究中心
+                                                        <i class="fal fa-caret-down color-success-500 ml-1"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
                                                         data-percent="0" data-piesize="50" data-linewidth="5"
                                                         data-linecap="butt">
@@ -447,23 +462,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <i class="fal fa-caret-up color-danger-500 ml-1"></i>
                                                     </span>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                                <div class="px-3 py-2 d-flex align-items-center">
-                                                    <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="100" data-piesize="50" data-linewidth="5"
-                                                        data-linecap="butt">
-                                                        <div
-                                                            class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                            <span class="js-percent d-block text-dark"></span>
-                                                        </div>
-                                                    </div>
-                                                    <span class="d-inline-block ml-2 text-muted">
-                                                        聯合研究中心
-                                                        <i class="fal fa-caret-down color-success-500 ml-1"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            </div>                                            
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-info-500 position-relative d-inline-flex align-items-center justify-content-center"
@@ -534,8 +533,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div id="panel-3" class="panel" data-panel-sortable data-panel-collapsed
-                                data-panel-close>
+                            <div id="panel-3" class="panel" data-panel-sortable data-panel-collapsed data-panel-close>
                                 <div class="panel-hdr">
                                     <h2>
                                         氣象資訊
@@ -544,9 +542,11 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 <div class="panel-container show">
                                     <div class="panel-content poisition-relative">
                                         <b-row>
-                                            <b-col cols="4"><b-img :src="weatherUrl" fluid/></b-col>
+                                            <b-col cols="4">
+                                                <b-img :src="weatherUrl" fluid />
+                                            </b-col>
                                             <b-col cols="8">{{ weatherForecast }}</b-col>
-                                        </b-row>                                        
+                                        </b-row>
                                     </div>
                                 </div>
                             </div>
@@ -1380,18 +1380,18 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     ],
                     weatherForecast: '',
                     weatherUrl: '',
+                    powerSummary: []
                 }
             },
             async mounted() {
                 await this.getWeatherReport();
+                await this.getPowerSummary();
             },
             methods: {
                 async getWeatherReport() {
                     try {
                         let url = `${location.protocol}//${location.host}/WeatherReport`
-                        console.log(url);
                         const resp = await axios.get(url);
-                        console.log(resp)
                         if (resp.status === 200) {
                             this.weatherForecast = '';
                             let weatherElements =
@@ -1412,7 +1412,48 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         throw new Error('fail to get weather report');
                     }
                 },
-            }
+                async getPowerSummary() {
+                    try {
+                        const resp = await axios.get('/RealtimeStatus')
+                        if (resp.status === 200) {
+                            this.powerSummary = resp.data.summary;
+                            console.log(this.powerSummary)
+                        }
+                    } catch (err) {
+                        throw new Error('fail to get power summary')
+                    }
+                },
+                getPowerConsumping(idx) {
+                    if (idx < this.powerSummary.length) {
+                        return `${this.powerSummary[idx].consuming}`
+                    } else
+                        return 'N/A'
+                },
+                getPowerGenerating(idx) {
+                    if (idx < this.powerSummary.length) {
+                        return `${this.powerSummary[idx].generating}`
+                    } else
+                        return 'N/A'
+                },
+                getGreenPercentage(idx) {
+                    if (idx < this.powerSummary.length) {
+                        if (this.powerSummary[idx].generating >= this.powerSummary[idx].consuming)
+                            return 100;
+                        else
+                            return 100 * this.powerSummary[idx].generating / this.powerSummary[idx].consuming;
+                    } else
+                        return 0;
+                },
+                getGreenPercentageStr(idx){
+                    if (idx < this.powerSummary.length) {
+                        if (this.powerSummary[idx].generating >= this.powerSummary[idx].consuming)
+                            return "100%";
+                        else
+                            return `${(100 * this.powerSummary[idx].generating / this.powerSummary[idx].consuming).toFixed(0)}%`;
+                    } else
+                        return "0%";
+                }
+            },
         });
     </script>
 </body>
