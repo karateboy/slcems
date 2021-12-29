@@ -3,7 +3,7 @@ lazy val root = (project in file("."))
   .settings(
     name := """slcems""",
     organization := "com.wecc",
-    version := "1.0-1",
+    version := "1.0-2",
     scalaVersion := "2.13.6",
     libraryDependencies ++= Seq(
       guice,

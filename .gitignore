@@ -1,5 +1,4 @@
 bin/
-/db
 /logs/
 /project/project
 /project/target
