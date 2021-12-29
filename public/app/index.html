@@ -292,14 +292,14 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="subheader">
                         <h1 class="subheader-title">
                             <i class='subheader-icon fal fa-chart-area'></i> 首頁 <span class='fw-300'></span>
-                        </h1>
+                        </h1>                        
                         <div class="subheader-block d-lg-flex align-items-center">
                             <div class="d-inline-flex flex-column justify-content-center mr-3">
                                 <span class="fw-300 fs-xs d-block opacity-50">
                                     <small>即時總發電量</small>
                                 </span>
                                 <span class="fw-500 fs-xl d-block color-primary-500">
-                                    150 KWh
+                                    150 kWh
                                 </span>
                             </div>
                             <span class="sparklines hidden-lg-down" sparkType="bar" sparkBarColor="#886ab5"
@@ -413,7 +413,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         </div>
                     </div>
                     <div class="row  match-height">
-                        <div class="col-lg-8">
+                        <div class="col-lg-4">
                             <div id="panel-2" class="panel panel-locked" data-panel-sortable data-panel-collapsed
                                 data-panel-close>
                                 <div class="panel-hdr">
@@ -424,7 +424,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 <div class="panel-container show">
                                     <div class="panel-content p-0">
                                         <div class="row row-grid no-gutters">
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center"
                                                         :data-percent='`${50}`' data-piesize="50" data-linewidth="5"
@@ -456,7 +456,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                            <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
                                                         data-percent="0" data-piesize="50" data-linewidth="5"
@@ -471,8 +471,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <i class="fal fa-caret-up color-danger-500 ml-1"></i>
                                                     </span>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                            </div> -->
+                                            <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-info-500 position-relative d-inline-flex align-items-center justify-content-center"
                                                         data-percent="0" data-piesize="50" data-linewidth="5"
@@ -487,8 +487,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <i class="fal fa-caret-up color-success-500 ml-1"></i>
                                                     </span>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                            </div> -->
+                                            <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-fusion-500 position-relative d-inline-flex align-items-center justify-content-center"
                                                         data-percent="0" data-piesize="50" data-linewidth="5"
@@ -503,8 +503,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <i class="fal fa-caret-down color-success-500 ml-1"></i>
                                                     </span>
                                                 </div>
-                                            </div>                                            
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                            </div>  -->
+                                            <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
                                                     <div class="js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
                                                         data-percent="0" data-piesize="50" data-linewidth="5"
@@ -519,34 +519,19 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <i class="fal fa-caret-up color-danger-500 ml-1"></i>
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <b-row>
+                                <b-col cols="4" class="text-center">
+                                    <b-img :src="weatherUrl" fluid />
+                                </b-col>
+                                <b-col cols="8">{{ weatherForecast }}</b-col>
+                            </b-row>
                         </div>
-                        <div class="col-lg-4">
-                            <div id="panel-3" class="panel" data-panel-sortable data-panel-collapsed data-panel-close>
-                                <div class="panel-hdr">
-                                    <h2>
-                                        氣象資訊
-                                    </h2>
-                                </div>
-                                <div class="panel-container show">
-                                    <div class="panel-content poisition-relative">
-                                        <b-row>
-                                            <b-col cols="4">
-                                                <b-img :src="weatherUrl" fluid />
-                                            </b-col>
-                                            <b-col cols="8">{{ weatherForecast }}</b-col>
-                                        </b-row>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row match-height">
-                        <div class="col-lg-12">
+                        <div class="col-lg-8">
                             <div id="panel-2" class="panel" class="panel panel-locked" data-panel-lock="false"
                                 data-panel-close="false" data-panel-fullscreen="false" data-panel-collapsed="false"
                                 data-panel-color="false" data-panel-locked="false" data-panel-refresh="false"
@@ -559,22 +544,21 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 <div class="panel-container show">
                                     <div class="panel-content">
                                         <b-row class="match-height">
-                                            <b-col lg="6" class="text-center">
-                                                <b-img class="p-2" src="img/map.png" fluid />
+                                            <b-col lg="4" class="text-center">
+                                                <b-img class="p-1" src="img/map.png" fluid />
                                             </b-col>
-                                            <b-col lg="6">
-                                                <div class="p-2">
-                                                    <b-table :items="items" :fields="fields" bordered
+                                            <b-col lg="8">
+                                                <div class="pt-2">
+                                                    <b-table :items="items" :fields="fields" bordered small
                                                         table-variant="success" />
                                                 </div>
-
                                             </b-col>
                                         </b-row>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>                        
+                    </div>                    
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
@@ -1426,13 +1410,13 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     if (idx < this.powerSummary.length) {
                         return `${this.powerSummary[idx].consuming}`
                     } else
-                        return 'N/A'
+                        return ''
                 },
                 getPowerGenerating(idx) {
                     if (idx < this.powerSummary.length) {
                         return `${this.powerSummary[idx].generating}`
                     } else
-                        return 'N/A'
+                        return ''
                 },
                 getGreenPercentage(idx) {
                     if (idx < this.powerSummary.length) {
