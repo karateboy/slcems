@@ -28,7 +28,7 @@ object Record extends Logging {
   def getLatestRecordTime(tabType: TableType.Value): Option[LocalDateTime] = {
     val tabName = Record.getTabName(tabType)
     sql"""
-      SELECT TOP 1 DateTime
+      SELECT TOP 1 [DateTime]
       FROM ${tabName}
       ORDER BY DateTime DESC
       """.map { r => r.localDateTime(1) }.single().apply()
@@ -37,10 +37,10 @@ object Record extends Logging {
   def getLatestMonitorRecordTime(tabType: TableType.Value, monitorID: Int): Option[LocalDateTime] = {
     val tabName = Record.getTabName(tabType)
     sql"""
-      SELECT TOP 1 DateTime
+      SELECT TOP 1 [DateTime]
       FROM ${tabName}
-      ORDER BY DateTime DESC
-      Where MonitorID = $monitorID
+      Where [MonitorID] = $monitorID
+      ORDER BY [DateTime] DESC
       """.map { r => r.localDateTime(1) }.single().apply()
   }
 
