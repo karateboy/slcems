@@ -3696,7 +3696,7 @@ html {
   background-color: #fff;
   -webkit-box-shadow: 0px 0px 13px 0px rgba(62, 44, 90, 0.08);
           box-shadow: 0px 0px 13px 0px rgba(62, 44, 90, 0.08);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.09);
   border-bottom: 1px solid #e0e0e0;
@@ -3983,7 +3983,7 @@ html {
   background-color: #e8e6ec;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   border-radius: 5px;
   position: relative;
   overflow: hidden;
@@ -5695,7 +5695,7 @@ $grid-breakpoints: (
   .page-content {
     padding: 1.5rem 2rem; }
     .page-content .panel {
-      margin-bottom: 1.5rem; } }
+      margin-bottom: 1rem; } }
 
 /*@include media-breakpoint-up(xl) {
 	.page-header {
@@ -5772,7 +5772,7 @@ $grid-breakpoints: (
       .page-wrapper .page-content .breadcrumb > .breadcrumb-item {
         max-width: 80px; }
       .page-wrapper .page-content .subheader {
-        margin-bottom: 1.5rem; }
+        margin-bottom: 1rem; }
         .page-wrapper .page-content .subheader .subheader-title {
           line-height: 32px;
           font-weight: 300; }
@@ -6980,7 +6980,7 @@ body:not(.no-slimscroll) .custom-scroll {
     display: inline-block;
     font-weight: 400;
     text-transform: capitalize;
-    margin-bottom: 1.5rem; }
+    margin-bottom: 1rem; }
     .mod-lean-subheader .subheader .subheader-title:not(:only-child) {
       margin-top: 23px; }
     .mod-lean-subheader .subheader .subheader-title small {

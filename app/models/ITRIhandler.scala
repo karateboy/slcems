@@ -23,7 +23,7 @@ object ITRIhandler {
       }
 
       val dateTime = LocalDateTime.ofInstant(data.time.toInstant, ZoneId.systemDefault())
-      Record.upsertPowerRecord(tableType)(PowerRecord(2, dateTime, Some(getGenerating()), None, Some(getConsuming())))
+      Record.upsertPowerRecord(tableType)(PowerRecord(2, dateTime, getGenerating(), None, getConsuming()))
     })
   }
 }

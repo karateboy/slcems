@@ -42,6 +42,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
         integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 <!-- BEGIN Body -->
 <!-- Possible Classes
@@ -292,14 +293,14 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="subheader">
                         <h1 class="subheader-title">
                             <i class='subheader-icon fal fa-chart-area'></i> 首頁 <span class='fw-300'></span>
-                        </h1>                        
+                        </h1>
                         <div class="subheader-block d-lg-flex align-items-center">
                             <div class="d-inline-flex flex-column justify-content-center mr-3">
                                 <span class="fw-300 fs-xs d-block opacity-50">
                                     <small>即時總發電量</small>
                                 </span>
                                 <span class="fw-500 fs-xl d-block color-primary-500">
-                                    150 kWh
+                                    {{totalGenerating}} kW
                                 </span>
                             </div>
                             <span class="sparklines hidden-lg-down" sparkType="bar" sparkBarColor="#886ab5"
@@ -312,7 +313,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                     <small>即時總用電量</small>
                                 </span>
                                 <span class="fw-500 fs-xl d-block color-danger-500">
-                                    375 kWh
+                                    {{totalConsuming}} kW
                                 </span>
                             </div>
                             <span class="sparklines hidden-lg-down" sparkType="bar" sparkBarColor="#fe6bb0"
@@ -334,16 +335,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                     <div class="panel-content border-faded border-left-0 border-right-0 border-top-0">
                                         <div class="row no-gutters">
                                             <div class="col-lg-7 col-xl-8">
-                                                <div class="position-relative">
-                                                    <div
-                                                        class="custom-control custom-switch position-absolute pos-top pos-left ml-5 mt-3 z-index-cloud">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="start_interval">
-                                                        <label class="custom-control-label"
-                                                            for="start_interval">即時發電量</label>
-                                                    </div>
-                                                    <div id="updating-chart" style="height:350px"></div>
-                                                </div>
+                                                <div id="chart_container"></div>
                                             </div>
                                             <div class="col-lg-5 col-xl-4 pl-lg-3">
                                                 <div class="d-flex p-3">
@@ -356,18 +348,18 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-success-500" role="progressbar"
-                                                        :style="`width: ${getGreenPercentageStr(0)};`"
+                                                        :style="`width: ${getPowerConsumpingPercentage(0)};`"
                                                         aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex">
                                                     示範場域
-                                                    <span class="d-inline-block ml-auto">{{getPowerConsumping(0)}}
+                                                    <span class="d-inline-block ml-auto">{{getPowerConsumping(1)}}
                                                         KW</span>
                                                 </div>
                                                 <div class="progress progress-sm mb-3">
                                                     <div class="progress-bar bg-success-500" role="progressbar"
-                                                        style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
+                                                        :style="`width: ${getPowerConsumpingPercentage(1)};`"
+                                                        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="d-flex mt-2">
                                                     台灣智駕測試實驗室(尚未連線)
@@ -423,36 +415,20 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                 </div>
                                 <div class="panel-container show">
                                     <div class="panel-content p-0">
-                                        <div class="row row-grid no-gutters">
+                                        <div v-if="dataReady" class="row row-grid no-gutters">
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                 <div class="px-3 py-2 d-flex align-items-center">
-                                                    <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        :data-percent='`${50}`' data-piesize="50" data-linewidth="5"
-                                                        data-linecap="butt">
-                                                        <div
-                                                            class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                            <span class="js-percent d-block text-dark"></span>
-                                                        </div>
-                                                    </div>
+                                                    <div class="d-inline-flex align-items-center justify-content-center color-primary-800">{{getGreenPercentageStr(0)}}</div>
                                                     <span class="d-inline-block ml-2 text-muted">
                                                         聯合研究中心
-                                                        <i class="fal fa-caret-down color-success-500 ml-1"></i>
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="px-3 py-2 d-flex align-items-center">
-                                                    <div class="js-easy-pie-chart color-primary-300 position-relative d-inline-flex align-items-center justify-content-center"
-                                                        data-percent="100" data-piesize="50" data-linewidth="5"
-                                                        data-linecap="butt" data-scalelength="0">
-                                                        <div
-                                                            class="d-flex flex-column align-items-center justify-content-center position-absolute pos-left pos-right pos-top pos-bottom fw-300 fs-lg">
-                                                            <span class="js-percent d-block text-dark"></span>
-                                                        </div>
-                                                    </div>
+                                                    <div class="d-inline-flex align-items-center justify-content-center color-primary-800">{{getGreenPercentageStr(1)}}</div>                                                    
                                                     <span class="d-inline-block ml-2 text-muted">
                                                         示範場域
-                                                        <i class="fal fa-caret-up color-danger-500 ml-1"></i>
                                                     </span>
                                                 </div>
                                             </div>
@@ -557,60 +533,12 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
-                    </div>                    
+                        </div>
+                    </div>
                 </main>
                 <!-- this overlay is activated only when mobile menu is triggered -->
                 <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
                 <!-- END Page Content -->
-                <!-- BEGIN Shortcuts -->
-                <div class="modal fade modal-backdrop-transparent" id="modal-shortcut" tabindex="-1" role="dialog"
-                    aria-labelledby="modal-shortcut" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-top modal-transparent" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <ul class="app-list w-auto h-auto p-0 text-left">
-                                    <li>
-                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
-                                            <div class="icon-stack">
-                                                <i class="base base-7 icon-stack-3x opacity-100 color-primary-500 "></i>
-                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
-                                                <i class="fal fa-home icon-stack-1x opacity-100 color-white"></i>
-                                            </div>
-                                            <span class="app-list-name">
-                                                Home
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page_inbox_general.html" class="app-list-item text-white border-0 m-0">
-                                            <div class="icon-stack">
-                                                <i class="base base-7 icon-stack-3x opacity-100 color-success-500 "></i>
-                                                <i class="base base-7 icon-stack-2x opacity-100 color-success-300 "></i>
-                                                <i class="ni ni-envelope icon-stack-1x text-white"></i>
-                                            </div>
-                                            <span class="app-list-name">
-                                                Inbox
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="intel_introduction.html" class="app-list-item text-white border-0 m-0">
-                                            <div class="icon-stack">
-                                                <i class="base base-7 icon-stack-2x opacity-100 color-primary-300 "></i>
-                                                <i class="fal fa-plus icon-stack-1x opacity-100 color-white"></i>
-                                            </div>
-                                            <span class="app-list-name">
-                                                Add More
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END Shortcuts -->
                 <!-- BEGIN Color profile -->
                 <!-- this area is hidden and will not be seen on screens or screen readers -->
                 <!-- we use this only for CSS color refernce for JS stuff -->
@@ -708,433 +636,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         </a>
     </nav>
     <!-- END Quick Menu -->
-    <!-- BEGIN Page Settings -->
-    <div class="modal fade js-modal-settings modal-backdrop-transparent" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-right modal-md">
-            <div class="modal-content">
-                <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center w-100">
-                    <h4 class="m-0 text-center color-white">
-                        Layout Settings
-                        <small class="mb-0 opacity-80">User Interface Settings</small>
-                    </h4>
-                    <button type="button" class="close text-white position-absolute pos-top pos-right p-2 m-1 mr-2"
-                        data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                    </button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="settings-panel">
-                        <div class="mt-4 d-table w-100 px-5">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0">
-                                    App Layout
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="list" id="fh">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="header-function-fixed"></a>
-                            <span class="onoffswitch-title">Fixed Header</span>
-                            <span class="onoffswitch-title-desc">header is in a fixed at all times</span>
-                        </div>
-                        <div class="list" id="nff">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-function-fixed"></a>
-                            <span class="onoffswitch-title">Fixed Navigation</span>
-                            <span class="onoffswitch-title-desc">left panel is fixed</span>
-                        </div>
-                        <div class="list" id="nfm">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-function-minify"></a>
-                            <span class="onoffswitch-title">Minify Navigation</span>
-                            <span class="onoffswitch-title-desc">Skew nav to maximize space</span>
-                        </div>
-                        <div class="list" id="nfh">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-function-hidden"></a>
-                            <span class="onoffswitch-title">Hide Navigation</span>
-                            <span class="onoffswitch-title-desc">roll mouse on edge to reveal</span>
-                        </div>
-                        <div class="list" id="nft">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-function-top"></a>
-                            <span class="onoffswitch-title">Top Navigation</span>
-                            <span class="onoffswitch-title-desc">Relocate left pane to top</span>
-                        </div>
-                        <div class="list" id="fff">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="footer-function-fixed"></a>
-                            <span class="onoffswitch-title">Fixed Footer</span>
-                            <span class="onoffswitch-title-desc">page footer is fixed</span>
-                        </div>
-                        <div class="list" id="mmb">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-main-boxed"></a>
-                            <span class="onoffswitch-title">Boxed Layout</span>
-                            <span class="onoffswitch-title-desc">Encapsulates to a container</span>
-                        </div>
-                        <div class="expanded">
-                            <ul class="mb-3 mt-1">
-                                <li>
-                                    <div class="bg-fusion-50" data-action="toggle" data-class="mod-bg-1"></div>
-                                </li>
-                                <li>
-                                    <div class="bg-warning-200" data-action="toggle" data-class="mod-bg-2"></div>
-                                </li>
-                                <li>
-                                    <div class="bg-primary-200" data-action="toggle" data-class="mod-bg-3"></div>
-                                </li>
-                                <li>
-                                    <div class="bg-success-300" data-action="toggle" data-class="mod-bg-4"></div>
-                                </li>
-                                <li>
-                                    <div class="bg-white border" data-action="toggle" data-class="mod-bg-none"></div>
-                                </li>
-                            </ul>
-                            <div class="list" id="mbgf">
-                                <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                    data-class="mod-fixed-bg"></a>
-                                <span class="onoffswitch-title">Fixed Background</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 d-table w-100 px-5">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0">
-                                    Mobile Menu
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="list" id="nmp">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-mobile-push"></a>
-                            <span class="onoffswitch-title">Push Content</span>
-                            <span class="onoffswitch-title-desc">Content pushed on menu reveal</span>
-                        </div>
-                        <div class="list" id="nmno">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-mobile-no-overlay"></a>
-                            <span class="onoffswitch-title">No Overlay</span>
-                            <span class="onoffswitch-title-desc">Removes mesh on menu reveal</span>
-                        </div>
-                        <div class="list" id="sldo">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="nav-mobile-slide-out"></a>
-                            <span class="onoffswitch-title">Off-Canvas <sup>(beta)</sup></span>
-                            <span class="onoffswitch-title-desc">Content overlaps menu</span>
-                        </div>
-                        <div class="mt-4 d-table w-100 px-5">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0">
-                                    Accessibility
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="list" id="mbf">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-bigger-font"></a>
-                            <span class="onoffswitch-title">Bigger Content Font</span>
-                            <span class="onoffswitch-title-desc">content fonts are bigger for readability</span>
-                        </div>
-                        <div class="list" id="mhc">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-high-contrast"></a>
-                            <span class="onoffswitch-title">High Contrast Text (WCAG 2 AA)</span>
-                            <span class="onoffswitch-title-desc">4.5:1 text contrast ratio</span>
-                        </div>
-                        <div class="list" id="mcb">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-color-blind"></a>
-                            <span class="onoffswitch-title">Daltonism <sup>(beta)</sup> </span>
-                            <span class="onoffswitch-title-desc">color vision deficiency</span>
-                        </div>
-                        <div class="list" id="mpc">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-pace-custom"></a>
-                            <span class="onoffswitch-title">Preloader Inside</span>
-                            <span class="onoffswitch-title-desc">preloader will be inside content</span>
-                        </div>
-                        <div class="list" id="mpi">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-panel-icon"></a>
-                            <span class="onoffswitch-title">SmartPanel Icons (not Panels)</span>
-                            <span class="onoffswitch-title-desc">smartpanel buttons will appear as icons</span>
-                        </div>
-                        <div class="mt-4 d-table w-100 px-5">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0">
-                                    Global Modifications
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="list" id="mcbg">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-clean-page-bg"></a>
-                            <span class="onoffswitch-title">Clean Page Background</span>
-                            <span class="onoffswitch-title-desc">adds more whitespace</span>
-                        </div>
-                        <div class="list" id="mhni">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-hide-nav-icons"></a>
-                            <span class="onoffswitch-title">Hide Navigation Icons</span>
-                            <span class="onoffswitch-title-desc">invisible navigation icons</span>
-                        </div>
-                        <div class="list" id="dan">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-disable-animation"></a>
-                            <span class="onoffswitch-title">Disable CSS Animation</span>
-                            <span class="onoffswitch-title-desc">Disables CSS based animations</span>
-                        </div>
-                        <div class="list" id="mhic">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-hide-info-card"></a>
-                            <span class="onoffswitch-title">Hide Info Card</span>
-                            <span class="onoffswitch-title-desc">Hides info card from left panel</span>
-                        </div>
-                        <div class="list" id="mlph">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-lean-subheader"></a>
-                            <span class="onoffswitch-title">Lean Subheader</span>
-                            <span class="onoffswitch-title-desc">distinguished page header</span>
-                        </div>
-                        <div class="list" id="mnl">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-nav-link"></a>
-                            <span class="onoffswitch-title">Hierarchical Navigation</span>
-                            <span class="onoffswitch-title-desc">Clear breakdown of nav links</span>
-                        </div>
-                        <div class="list" id="mdn">
-                            <a href="#" onclick="return false;" class="btn btn-switch" data-action="toggle"
-                                data-class="mod-nav-dark"></a>
-                            <span class="onoffswitch-title">Dark Navigation</span>
-                            <span class="onoffswitch-title-desc">Navigation background is darkend</span>
-                        </div>
-                        <hr class="mb-0 mt-4">
-                        <div class="mt-4 d-table w-100 pl-5 pr-3">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0">
-                                    Global Font Size
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="list mt-1">
-                            <div class="btn-group btn-group-sm btn-group-toggle my-2" data-toggle="buttons">
-                                <label class="btn btn-default btn-sm" data-action="toggle-swap"
-                                    data-class="root-text-sm" data-target="html">
-                                    <input type="radio" name="changeFrontSize"> SM
-                                </label>
-                                <label class="btn btn-default btn-sm" data-action="toggle-swap" data-class="root-text"
-                                    data-target="html">
-                                    <input type="radio" name="changeFrontSize" checked=""> MD
-                                </label>
-                                <label class="btn btn-default btn-sm" data-action="toggle-swap"
-                                    data-class="root-text-lg" data-target="html">
-                                    <input type="radio" name="changeFrontSize"> LG
-                                </label>
-                                <label class="btn btn-default btn-sm" data-action="toggle-swap"
-                                    data-class="root-text-xl" data-target="html">
-                                    <input type="radio" name="changeFrontSize"> XL
-                                </label>
-                            </div>
-                            <span class="onoffswitch-title-desc d-block mb-0">Change <strong>root</strong> font size to
-                                effect rem
-                                values (resets on page refresh)</span>
-                        </div>
-                        <hr class="mb-0 mt-4">
-                        <div class="mt-4 d-table w-100 pl-5 pr-3">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0 pr-2 d-flex">
-                                    Theme colors
-                                    <a href="#" class="ml-auto fw-400 fs-xs" data-toggle="popover" data-trigger="focus"
-                                        data-placement="top" title="" data-html="true"
-                                        data-content="The settings below uses <code>localStorage</code> to load the external <strong>CSS</strong> file as an overlap to the base css. Due to network latency and <strong>CPU utilization</strong>, you may experience a brief flickering effect on page load which may show the intial applied theme for a split second. Setting the prefered style/theme in the header will prevent this from happening."
-                                        data-original-title="<span class='text-primary'><i class='fal fa-exclamation-triangle mr-1'></i> Heads up!</span>"
-                                        data-template="<div class=&quot;popover bg-white border-white&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><h3 class=&quot;popover-header bg-transparent&quot;></h3><div class=&quot;popover-body fs-xs&quot;></div></div>"><i
-                                            class="fal fa-info-circle mr-1"></i> more info</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="expanded theme-colors pl-5 pr-3">
-                            <ul class="m-0">
-                                <li>
-                                    <a href="#" id="myapp-0" data-action="theme-update" data-themesave data-theme=""
-                                        data-toggle="tooltip" data-placement="top" title="Wisteria (base css)"
-                                        data-original-title="Wisteria (base css)"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-1" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-1.css" data-toggle="tooltip"
-                                        data-placement="top" title="Tapestry" data-original-title="Tapestry"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-2" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-2.css" data-toggle="tooltip"
-                                        data-placement="top" title="Atlantis" data-original-title="Atlantis"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-3" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-3.css" data-toggle="tooltip"
-                                        data-placement="top" title="Indigo" data-original-title="Indigo"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-4" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-4.css" data-toggle="tooltip"
-                                        data-placement="top" title="Dodger Blue" data-original-title="Dodger Blue"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-5" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-5.css" data-toggle="tooltip"
-                                        data-placement="top" title="Tradewind" data-original-title="Tradewind"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-6" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-6.css" data-toggle="tooltip"
-                                        data-placement="top" title="Cranberry" data-original-title="Cranberry"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-7" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-7.css" data-toggle="tooltip"
-                                        data-placement="top" title="Oslo Gray" data-original-title="Oslo Gray"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-8" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-8.css" data-toggle="tooltip"
-                                        data-placement="top" title="Chetwode Blue"
-                                        data-original-title="Chetwode Blue"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-9" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-9.css" data-toggle="tooltip"
-                                        data-placement="top" title="Apricot" data-original-title="Apricot"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-10" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-10.css" data-toggle="tooltip"
-                                        data-placement="top" title="Blue Smoke" data-original-title="Blue Smoke"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-11" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-11.css" data-toggle="tooltip"
-                                        data-placement="top" title="Green Smoke" data-original-title="Green Smoke"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-12" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-12.css" data-toggle="tooltip"
-                                        data-placement="top" title="Wild Blue Yonder"
-                                        data-original-title="Wild Blue Yonder"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-13" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-13.css" data-toggle="tooltip"
-                                        data-placement="top" title="Emerald" data-original-title="Emerald"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-14" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-14.css" data-toggle="tooltip"
-                                        data-placement="top" title="Supernova" data-original-title="Supernova"></a>
-                                </li>
-                                <li>
-                                    <a href="#" id="myapp-15" data-action="theme-update" data-themesave
-                                        data-theme="css/themes/cust-theme-15.css" data-toggle="tooltip"
-                                        data-placement="top" title="Hoki" data-original-title="Hoki"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <hr class="mb-0 mt-4">
-                        <div class="mt-4 d-table w-100 pl-5 pr-3">
-                            <div class="d-table-cell align-middle">
-                                <h5 class="p-0 pr-2 d-flex">
-                                    Theme Modes (beta)
-                                    <a href="#" class="ml-auto fw-400 fs-xs" data-toggle="popover" data-trigger="focus"
-                                        data-placement="top" title="" data-html="true"
-                                        data-content="This is a brand new technique we are introducing which uses CSS variables to infiltrate color options. While this has been working nicely on modern browsers without much issues, some users <strong>may still face issues on Internet Explorer </strong>. Until these issues are resolved or Internet Explorer improves, this feature will remain in Beta"
-                                        data-original-title="<span class='text-primary'><i class='fal fa-question-circle mr-1'></i> Why beta?</span>"
-                                        data-template="<div class=&quot;popover bg-white border-white&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><h3 class=&quot;popover-header bg-transparent&quot;></h3><div class=&quot;popover-body fs-xs&quot;></div></div>"><i
-                                            class="fal fa-question-circle mr-1"></i> why beta?</a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="pl-5 pr-3 py-3">
-                            <div class="ie-only alert alert-warning d-none">
-                                <h6>Internet Explorer Issue</h6>
-                                This particular component may not work as expected in Internet Explorer. Please use with
-                                caution.
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-4 pr-2 text-center">
-                                    <div id="skin-default" data-action="toggle-replace"
-                                        data-replaceclass="mod-skin-light mod-skin-dark" data-class=""
-                                        data-toggle="tooltip" data-placement="top" title=""
-                                        class="d-flex bg-white border border-primary rounded overflow-hidden text-success js-waves-on"
-                                        data-original-title="Default Mode" style="height: 80px">
-                                        <div
-                                            class="bg-primary-600 bg-primary-gradient px-2 pt-0 border-right border-primary">
-                                        </div>
-                                        <div class="d-flex flex-column flex-1">
-                                            <div class="bg-white border-bottom border-primary py-1"></div>
-                                            <div class="bg-faded flex-1 pt-3 pb-3 px-2">
-                                                <div class="py-3"
-                                                    style="background:url('img/demo/s-1.png') top left no-repeat;background-size: 100%;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    Default
-                                </div>
-                                <div class="col-4 px-1 text-center">
-                                    <div id="skin-light" data-action="toggle-replace" data-replaceclass="mod-skin-dark"
-                                        data-class="mod-skin-light" data-toggle="tooltip" data-placement="top" title=""
-                                        class="d-flex bg-white border border-secondary rounded overflow-hidden text-success js-waves-on"
-                                        data-original-title="Light Mode" style="height: 80px">
-                                        <div class="bg-white px-2 pt-0 border-right border-"></div>
-                                        <div class="d-flex flex-column flex-1">
-                                            <div class="bg-white border-bottom border- py-1"></div>
-                                            <div class="bg-white flex-1 pt-3 pb-3 px-2">
-                                                <div class="py-3"
-                                                    style="background:url('img/demo/s-1.png') top left no-repeat;background-size: 100%;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    Light
-                                </div>
-                                <div class="col-4 pl-2 text-center">
-                                    <div id="skin-dark" data-action="toggle-replace" data-replaceclass="mod-skin-light"
-                                        data-class="mod-skin-dark" data-toggle="tooltip" data-placement="top" title=""
-                                        class="d-flex bg-white border border-dark rounded overflow-hidden text-success js-waves-on"
-                                        data-original-title="Dark Mode" style="height: 80px">
-                                        <div class="bg-fusion-500 px-2 pt-0 border-right"></div>
-                                        <div class="d-flex flex-column flex-1">
-                                            <div class="bg-fusion-600 border-bottom py-1"></div>
-                                            <div class="bg-fusion-300 flex-1 pt-3 pb-3 px-2">
-                                                <div class="py-3 opacity-30"
-                                                    style="background:url('img/demo/s-1.png') top left no-repeat;background-size: 100%;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    Dark
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="mb-0 mt-4">
-                        <div class="pl-5 pr-3 py-3 bg-faded">
-                            <div class="row no-gutters">
-                                <div class="col-6 pr-1">
-                                    <a href="#" class="btn btn-outline-danger fw-500 btn-block"
-                                        data-action="app-reset">Reset Settings</a>
-                                </div>
-                                <div class="col-6 pl-1">
-                                    <a href="#" class="btn btn-danger fw-500 btn-block"
-                                        data-action="factory-reset">Factory Reset</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <span id="saving"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END Page Settings -->
     <!-- base vendor bundle: 
 			 DOC: if you remove pace.js from core please note on Internet Explorer some CSS animations may execute before a page is fully loaded, resulting 'jump' animations 
 						+ pace.js (recommended)
@@ -1160,127 +661,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <script src="js/statistics/easypiechart/easypiechart.bundle.js"></script>
     <script src="js/statistics/flot/flot.bundle.js"></script>
     <script src="js/miscellaneous/jqvmap/jqvmap.bundle.js"></script>
-    <script>
-        $(document).ready(function () {
-            //$('#js-page-content').smartPanel(); 
-
-
-            /* TAB 1: UPDATING CHART */
-            var data = [],
-                totalPoints = 200;
-            var getRandomData = function () {
-                if (data.length > 0)
-                    data = data.slice(1);
-
-                // do a random walk
-                while (data.length < totalPoints) {
-                    var prev = data.length > 0 ? data[data.length - 1] : 50;
-                    var y = prev + Math.random() * 10 - 5;
-                    if (y < 0)
-                        y = 0;
-                    if (y > 100)
-                        y = 100;
-                    data.push(y);
-                }
-
-                // zip the generated y values with the x values
-                var res = [];
-                for (var i = 0; i < data.length; ++i)
-                    res.push([i, data[i]])
-                return res;
-            }
-            // setup control widget
-            var updateInterval = 1500;
-            $("#updating-chart").val(updateInterval).change(function () {
-
-                var v = $(this).val();
-                if (v && !isNaN(+v)) {
-                    updateInterval = +v;
-                    $(this).val("" + updateInterval);
-                }
-
-            });
-            // setup plot
-            var options = {
-                colors: [color.primary._700],
-                series:
-                {
-                    lines:
-                    {
-                        show: true,
-                        lineWidth: 0.5,
-                        fill: 0.9,
-                        fillColor:
-                        {
-                            colors: [
-                                {
-                                    opacity: 0.6
-                                },
-                                {
-                                    opacity: 0
-                                }]
-                        },
-                    },
-
-                    shadowSize: 0 // Drawing is faster without shadows
-                },
-                grid:
-                {
-                    borderColor: 'rgba(0,0,0,0.05)',
-                    borderWidth: 1,
-                    labelMargin: 5
-                },
-                xaxis:
-                {
-                    color: '#F0F0F0',
-                    tickColor: 'rgba(0,0,0,0.05)',
-                    font:
-                    {
-                        size: 10,
-                        color: '#999'
-                    }
-                },
-                yaxis:
-                {
-                    min: 0,
-                    max: 100,
-                    color: '#F0F0F0',
-                    tickColor: 'rgba(0,0,0,0.05)',
-                    font:
-                    {
-                        size: 10,
-                        color: '#999'
-                    }
-                }
-            };
-            var plot = $.plot($("#updating-chart"), [getRandomData()], options);
-            /* live switch */
-            $('input[type="checkbox"]#start_interval').click(function () {
-                if ($(this).prop('checked')) {
-                    $on = true;
-                    updateInterval = 1500;
-                    update();
-                }
-                else {
-                    clearInterval(updateInterval);
-                    $on = false;
-                }
-            });
-            var update = function () {
-                if ($on == true) {
-                    plot.setData([getRandomData()]);
-                    plot.draw();
-                    setTimeout(update, updateInterval);
-
-                }
-                else {
-                    clearInterval(updateInterval)
-                }
-
-            }
-        });
-
-    </script>
     <script>
         moment.locale('zh_tw');
         new Vue({
@@ -1363,12 +743,27 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     ],
                     weatherForecast: '',
                     weatherUrl: '',
-                    powerSummary: []
+                    powerSummary: [],
+                    dataReady: false
+                }
+            },
+            computed: {
+                totalGenerating() {
+                    let sum = 0;
+                    this.powerSummary.forEach(p => sum += p.generating);
+                    return sum.toFixed(0);
+                },
+                totalConsuming() {
+                    let sum = 0;
+                    this.powerSummary.forEach(p => sum += p.consuming);
+                    return sum.toFixed(0);
                 }
             },
             async mounted() {
                 await this.getWeatherReport();
                 await this.getPowerSummary();
+                await this.getRealtimeChart();
+                this.dataReady = true;
             },
             methods: {
                 async getWeatherReport() {
@@ -1408,9 +803,21 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 },
                 getPowerConsumping(idx) {
                     if (idx < this.powerSummary.length) {
-                        return `${this.powerSummary[idx].consuming}`
+                        return `${this.powerSummary[idx].consuming.toFixed(3)}`
                     } else
                         return ''
+                },
+                getPowerConsumpingPercentage(idx) {
+                    if (idx < this.powerSummary.length) {
+                        let consumingList = this.powerSummary.map(p => p.consuming);
+                        let max = Math.max(...consumingList);
+                        console.log(`${idx} ${max}`)
+
+                        let ret = `${(this.powerSummary[idx].consuming * 100 / max).toFixed(0)}%`
+                        console.log(`ret=${ret}`);
+                        return `${(this.powerSummary[idx].consuming * 100 / max).toFixed(0)}%`
+                    } else
+                        return '0%'
                 },
                 getPowerGenerating(idx) {
                     if (idx < this.powerSummary.length) {
@@ -1435,7 +842,63 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                             return `${(100 * this.powerSummary[idx].generating / this.powerSummary[idx].consuming).toFixed(0)}%`;
                     } else
                         return "0%";
-                }
+                },
+                async getRealtimeChart() {
+                    try {
+                        let monitors = ['RdCenter', 'ITRI'];
+                        let monitorTypes = ['generating'];
+                        let start = moment().subtract(1, 'days').valueOf();
+                        let end = moment().valueOf();
+                        const url = `/HistoryTrend/${monitors.join(':')}/${monitorTypes.join(':')}/Min/${start}/${end}`;
+                        console.log(url)
+                        const res = await axios.get(url);
+                        const ret = res.data;
+                        ret.chart = {
+                            type: "spline",
+                            zoomType: 'x',
+                            panning: true,
+                            panKey: 'shift',
+                            alignTicks: false,
+                        };
+
+                        ret.colors = [
+                            '#7CB5EC',
+                            '#434348',
+                            '#90ED7D',
+                            '#F7A35C',
+                            '#8085E9',
+                            '#F15C80',
+                            '#E4D354',
+                            '#2B908F',
+                            '#FB9FA8',
+                            '#91E8E1',
+                            '#7CB5EC',
+                            '#80C535',
+                            '#969696',
+                        ];
+
+                        ret.tooltip = { valueDecimals: 2 };
+                        ret.legend = { enabled: true };
+                        ret.credits = {
+                            enabled: false,
+                            href: 'http://www.wecc.com.tw/',
+                        };
+                        ret.xAxis.type = 'datetime';
+                        ret.xAxis.dateTimeLabelFormats = {
+                            day: '%b%e日',
+                            week: '%b%e日',
+                            month: '%y年%b',
+                        };
+
+                        ret.time = {
+                            timezoneOffset: -480,
+                        };
+
+                        Highcharts.chart('chart_container', ret);
+                    } catch (err) {
+                        throw new Error("failed to get realtime chart!");
+                    }
+                },                
             },
         });
     </script>

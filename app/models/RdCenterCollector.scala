@@ -1,7 +1,6 @@
 package models
 
 import akka.actor.{Actor, Cancellable, Props}
-import controllers.PowerStatus
 import play.api.Logging
 import play.api.libs.json.{JsError, Json}
 import play.api.libs.ws.WSClient
@@ -9,8 +8,7 @@ import play.api.libs.ws.WSClient
 import java.time.{LocalDateTime, LocalTime}
 import javax.inject.Inject
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.concurrent.duration.{FiniteDuration, MICROSECONDS, MINUTES, SECONDS}
+import scala.concurrent.duration.{FiniteDuration, MINUTES, SECONDS}
 import scala.util.Failure
 
 case class GeneralData(grid: String, pv: String, building: String, ess: String, ev: String)
@@ -22,24 +20,6 @@ object RdCenterCollector extends Logging {
 
   implicit val r2 = Json.reads[GeneralData]
   implicit val r1 = Json.reads[GeneralStatus]
-
-  def getGeneralPowerStatus(wsClient: WSClient): Future[Option[PowerStatus]] = {
-    try {
-      val f = wsClient.url("https://stb.stpi.narl.org.tw/general").get()
-
-      for (ret <- f) yield {
-        for (status <- ret.json.validate[GeneralStatus].asOpt if status.status && status.data.nonEmpty) yield {
-          PowerStatus("聯合研究中心", status.data(0).pv.toDouble, status.data(0).ess.toDouble, status.data(0).building.toDouble)
-        }
-      }
-    } catch {
-      case ex: Exception =>
-        Future {
-          logger.error("error", ex)
-          None
-        }
-    }
-  }
 
   case object ParseWebInfo
 }
@@ -75,11 +55,11 @@ class RdCenterCollector @Inject()(wsClient: WSClient) extends Actor with Logging
             },
             status => {
               if (status.status && status.data.nonEmpty) {
-                val generating: Option[Double] = try {
-                  Some(status.data(0).pv.toDouble)
+                val generating: Double = try {
+                  status.data(0).pv.toDouble
                 } catch {
                   case _: Exception =>
-                    None
+                    0d
                 }
                 val storing = try {
                   Some(status.data(0).ess.toDouble)
@@ -88,11 +68,11 @@ class RdCenterCollector @Inject()(wsClient: WSClient) extends Actor with Logging
                     None
                 }
 
-                val consuming = try {
-                  Some(status.data(0).building.toDouble)
+                val consuming: Double = try {
+                  status.data(0).building.toDouble
                 } catch {
                   case _: Exception =>
-                    None
+                    0
                 }
                 val now = LocalDateTime.now().withSecond(0).withNano(0)
                 Record.upsertPowerRecord(TableType.Min)(PowerRecord(1, now, generating, storing, consuming))

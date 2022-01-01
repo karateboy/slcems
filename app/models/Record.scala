@@ -20,19 +20,10 @@ case class Stat(
 case class MonitorTypeRecord(monitorType: String, dataList: List[(Long, Option[Float], Option[String])], stat: Stat)
 
 case class PowerRecord(monitorID: Int, dateTime: LocalDateTime,
-                       generating: Option[Double], storing: Option[Double], consuming: Option[Double])
+                       generating: Double, storing: Option[Double], consuming: Double)
 
 object Record extends Logging {
   implicit val session: DBSession = AutoSession
-
-  def getLatestRecordTime(tabType: TableType.Value): Option[LocalDateTime] = {
-    val tabName = Record.getTabName(tabType)
-    sql"""
-      SELECT TOP 1 [DateTime]
-      FROM ${tabName}
-      ORDER BY DateTime DESC
-      """.map { r => r.localDateTime(1) }.single().apply()
-  }
 
   def getLatestMonitorRecordTime(tabType: TableType.Value, monitorID: Int): Option[LocalDateTime] = {
     val tabName = Record.getTabName(tabType)
@@ -44,17 +35,29 @@ object Record extends Logging {
       """.map { r => r.localDateTime(1) }.single().apply()
   }
 
+  def getLatestMonitorRecord(tableType: TableType.Value, monitorID: Int) = {
+    val tabName = Record.getTabName(tableType)
+    sql"""
+      SELECT TOP 1 *
+      FROM ${tabName}
+      Where [MonitorID] = $monitorID
+      ORDER BY [DateTime] DESC
+      """.map { rs =>
+      PowerRecord(rs.int(1), rs.localDateTime(2), rs.double(3),
+        rs.doubleOpt(4), rs.double(5))
+    }.single().apply()
+  }
+
   def recalculateHour(monitorID: Int, start: LocalDateTime): Unit = {
     val minData = getRecord(TableType.Min)(monitorID, start, start.plusHours(1))
-    logger.info(s"recalculateHour ${start} with #=${minData.size}")
     if (minData.nonEmpty) {
       val size = minData.size
-      val generating = minData.flatMap(_.generating).sum / size
+      val generating = minData.map(_.generating).sum / size
       val storing = minData.flatMap(_.storing).sum / size
-      val consuming = minData.flatMap(_.consuming).sum / size
-      Record.upsertPowerRecord(TableType.Hour)(PowerRecord(monitorID, start, Some(generating), Some(storing), Some(consuming)))
-    }else {
-      Record.upsertPowerRecord(TableType.Hour)(PowerRecord(monitorID, start, Some(0), Some(0), Some(0)))
+      val consuming = minData.map(_.consuming).sum / size
+      Record.upsertPowerRecord(TableType.Hour)(PowerRecord(monitorID, start, generating, Some(storing), consuming))
+    } else {
+      Record.upsertPowerRecord(TableType.Hour)(PowerRecord(monitorID, start, 0, Some(0), 0))
     }
   }
 
@@ -95,7 +98,51 @@ object Record extends Logging {
          From $tabName
          Where [DateTime] >= $startT and [DateTime] < $endT and [MonitorID] = $monitorID
          """.map(rs => PowerRecord(rs.int(1), rs.localDateTime(2),
-      rs.doubleOpt(3), rs.doubleOpt(4), rs.doubleOpt(5))).list().apply()
+      rs.double(3), rs.doubleOpt(4), rs.double(5))).list().apply()
+  }
+
+  def getRecordMap(tabType: TableType.Value)(monitor: String, start: LocalDateTime, end: LocalDateTime): Map[String, Seq[(LocalDateTime, Option[Double])]] = {
+    val tabName = Record.getTabName(tabType)
+    val monitorID = Monitor.idMap(monitor)
+    val startT: Timestamp = Timestamp.valueOf(start)
+    val endT: Timestamp = Timestamp.valueOf(end)
+    val retList: Seq[PowerRecord] =
+      sql"""
+         Select *
+         From $tabName
+         Where [DateTime] >= $startT and [DateTime] < $endT and [MonitorID] = $monitorID
+         Order by [DateTime] ASC
+         """.map(rs => PowerRecord(rs.int(1), rs.localDateTime(2),
+        rs.double(3), rs.doubleOpt(4), rs.double(5))).list().apply()
+
+    val pairs =
+      for {
+        mt <- MonitorType.map.keys
+      } yield {
+        val list =
+          for {
+            doc <- retList
+            dt = doc.dateTime
+          } yield {
+            mt match {
+              case "generating"=>
+                (dt, Some(doc.generating))
+              case "storing" =>
+                (dt, doc.storing)
+              case "consuming" =>
+                (dt, Some(doc.consuming))
+              case "consumingPercent" =>
+                (dt, Some(doc.consuming*100/Monitor.map(monitorID).contractCapacity))
+              case "greenPercent"=>
+                if(doc.consuming == 0)
+                  (dt, Some(0d))
+                else
+                  (dt, Some(doc.generating*100/doc.consuming))
+            }
+          }
+        mt -> list
+      }
+    pairs.toMap
   }
 
   def getTabName(tab: TableType.Value) = {
