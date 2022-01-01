@@ -458,7 +458,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         consuming += p.consuming;
                     });
                     if(consuming !== 0)
-                        return `${(generating*100/consuming).toFixed(2)}%`
+                        return `${Math.abs(generating*100/consuming).toFixed(2)}%`
                     else
                         return "0%";
                 },
@@ -468,7 +468,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         generating += p.generating;                        
                     });
 
-                    return `${(generating*100/(688+1041)).toFixed(2)}%`
+                    return `${Math.abs(generating*100/(688+1041)).toFixed(2)}%`
                 }
             },
             async mounted() {
