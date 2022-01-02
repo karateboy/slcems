@@ -134,7 +134,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             <aside class="page-sidebar">
                 <div class="page-logo">
                     <img src="img/logo.svg" alt="沙崙科學園區" aria-roledescription="logo">
-                    <span class="page-logo-text text-center">沙崙智慧綠能科學城<br />電能管理系統資訊平台</span>
+                    <span class="page-logo-text text-center">沙崙智慧綠能科學城<br />電能管理系統資訊平臺</span>
                     <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
                 </div>
                 <!-- BEGIN PRIMARY NAVIGATION -->
@@ -307,7 +307,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     </div>
                     <b-card no-body>
                         <b-tabs card>
-                            <b-tab title="台灣智駕測試實驗室(N/A)" disabled>
+                            <b-tab title="臺灣智駕測試實驗室(N/A)" disabled>
                                 <b-card-text>Tab contents 1</b-card-text>
                             </b-tab>
                             <b-tab title="智慧綠能循環住宅園區(N/A)" disabled>
@@ -438,6 +438,62 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <script src="js/statistics/easypiechart/easypiechart.bundle.js"></script>
     <script>
         moment.locale('zh_tw');
+        Highcharts.setOptions({
+            lang: {
+                contextButtonTitle: '圖表功能表',
+                downloadJPEG: '下載JPEG',
+                downloadPDF: '下載PDF',
+                downloadPNG: '下載PNG',
+                downloadSVG: '下載SVG',
+                downloadCSV: '下載CSV',
+                downloadXLS: '下載XLS',
+                drillUpText: '回到{series.name}.',
+                noData: '無資料',
+                months: [
+                    '1月',
+                    '2月',
+                    '3月',
+                    '4月',
+                    '5月',
+                    '6月',
+                    '7月',
+                    '8月',
+                    '9月',
+                    '10月',
+                    '11月',
+                    '12月',
+                ],
+                printChart: '列印圖表',
+                resetZoom: '重設放大區間',
+                resetZoomTitle: '回到原圖大小',
+                shortMonths: [
+                    '1月',
+                    '2月',
+                    '3月',
+                    '4月',
+                    '5月',
+                    '6月',
+                    '7月',
+                    '8月',
+                    '9月',
+                    '10月',
+                    '11月',
+                    '12月',
+                ],
+                viewFullscreen: '全螢幕檢視',
+                viewData: '檢視資料表',
+                weekdays: [
+                    '星期日',
+                    '星期一',
+                    '星期二',
+                    '星期三',
+                    '星期四',
+                    '星期五',
+                    '星期六',
+                ],
+            },
+        });
+
         new Vue({
             //this targets the div id app
             el: '#js-page-content',
@@ -450,25 +506,25 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 };
             },
             computed: {
-                greenPercent(){
+                greenPercent() {
                     let generating = 0;
                     let consuming = 0;
-                    this.powerSummary.forEach(p=>{
+                    this.powerSummary.forEach(p => {
                         generating += p.generating;
                         consuming += p.consuming;
                     });
-                    if(consuming !== 0)
-                        return `${Math.abs(generating*100/consuming).toFixed(2)}%`
+                    if (consuming !== 0)
+                        return `${Math.abs(generating * 100 / consuming).toFixed(2)}%`
                     else
                         return "0%";
                 },
-                devicePercent(){
+                devicePercent() {
                     let generating = 0;
-                    this.powerSummary.forEach(p=>{
-                        generating += p.generating;                        
+                    this.powerSummary.forEach(p => {
+                        generating += p.generating;
                     });
 
-                    return `${Math.abs(generating*100/(688+1041)).toFixed(2)}%`
+                    return `${Math.abs(generating * 100 / (688 + 1041)).toFixed(2)}%`
                 }
             },
             async mounted() {
