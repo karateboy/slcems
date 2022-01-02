@@ -733,7 +733,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     fields: [
                         {
                             key: "no",
-                            label: "廠區編號",
+                            label: "編號",
                             sortable: true
                         },
                         {
@@ -869,9 +869,11 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 },
                 getPowerConsumpingPercentage(idx) {
                     if (idx < this.powerSummary.length) {
-                        let consumingList = this.powerSummary.map(p => p.consuming);
-                        let max = Math.max(...consumingList);
-                        console.log(`${idx} ${max}`)
+                        let max = 1;
+                        if (idx === 0)
+                            max = 688;
+                        else
+                            max = 1041;
 
                         let ret = `${(this.powerSummary[idx].consuming * 100 / max).toFixed(0)}%`
                         console.log(`ret=${ret}`);
