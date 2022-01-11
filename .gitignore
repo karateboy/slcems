@@ -16,3 +16,4 @@ server.pid
 /.settings
 /.sbtserver
 .idea
+/.bsp
