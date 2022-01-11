@@ -126,7 +126,7 @@ object Record extends Logging {
           } yield {
             mt match {
               case "generating"=>
-                (dt, Some(doc.generating))
+                (dt, Some(Math.abs(doc.generating)))
               case "storing" =>
                 (dt, doc.storing)
               case "consuming" =>
